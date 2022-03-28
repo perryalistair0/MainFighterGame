@@ -1,0 +1,6 @@
+Legsweep -> Long, knocks over, high damage
+Punch -> short, high damage
+crouch punch -> Short, low damage
+
+High block -> Punch, crouch punch
+Low block -> Legsweep, crouch punch
