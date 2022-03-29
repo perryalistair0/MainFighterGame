@@ -6,9 +6,12 @@ public class CharacterLegsweepState : CharacterBaseState
 {
     public float TurnSpeed = 10f;
     public int Step = 0;
+    bool AppliedDamage = false;
     public Vector3 StartRotation = Vector3.zero; 
     public override void EnterState(CharacterStateManager character)
     {
+        AppliedDamage = false;
+
         character.ShowEyebrows(true);
         Step = 0;
 
@@ -17,9 +20,24 @@ public class CharacterLegsweepState : CharacterBaseState
 
     public override void OnCollisionEnter(CharacterStateManager character, Collision collision)
     {
+        GameObject other = collision.gameObject;
+        if (other.CompareTag("Player"))
+        {
+            Debug.Log("Playre");
+            if (Step == 0)
+            {
+                Debug.Log("Step");
+                if (!AppliedDamage)
+                {
+                    Debug.Log("AppliedDamage ");
+                    collision.gameObject.GetComponent<CharacterStateManager>().TakeDamage(15);
+                }
+                AppliedDamage = true; 
+            }
+        }
     }
 
-    public override int TakeDamage(CharacterStateManager character, int Damage)
+    public override void TakeDamage(CharacterStateManager character, int Damage)
     {
         throw new System.NotImplementedException();
     }
@@ -38,7 +56,7 @@ public class CharacterLegsweepState : CharacterBaseState
         }
         if(Step == 1)
         {
-            character.SingleLeg.transform.localPosition = new Vector3(-1.153821f, -1.977974f, -1.504989f);
+            character.SingleLeg.transform.localPosition = new Vector3(-1.153821f, -2.46f, -1.504989f);
             character.SingleLeg.transform.rotation = Quaternion.Euler(0f, 25f, 0f);
 
             character.transform.rotation = Quaternion.Slerp(character.transform.rotation,

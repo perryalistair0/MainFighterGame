@@ -19,11 +19,13 @@ public class CharacterCrouchState : CharacterBaseState
 
     public override void OnCollisionEnter(CharacterStateManager character, Collision collision)
     {
+        
     }
 
-    public override int TakeDamage(CharacterStateManager character, int Damage)
+    public override void TakeDamage(CharacterStateManager character, int Damage)
     {
-        throw new System.NotImplementedException();
+        character.gameManager.TakeDamage(character.IsPlayer1, Damage/5);
+        character.SwitchState(character.CharacterStandlockState);
     }
 
     public override void UpdateState(CharacterStateManager character)
@@ -39,5 +41,6 @@ public class CharacterCrouchState : CharacterBaseState
         {
             character.SwitchState(character.CharcterCrouchPunchState);
         }
+        character.transform.position = new Vector3(character.transform.position.x, 2.5f, character.transform.position.z);
     }
 }

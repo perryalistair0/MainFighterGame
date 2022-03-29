@@ -7,11 +7,12 @@ public class CharacterCrouchPunchState : CharacterBaseState
     public float PunchSpeed = 20f;
     private Transform Arm;
     private int step = 0;
-
+    bool AppliedDamage;
 
     public Vector3 StartRotation = Vector3.zero;
     public override void EnterState(CharacterStateManager character)
     {
+        AppliedDamage = false; 
 
         step = 0;
         Arm = character.GetTransform().Find("Arm1");
@@ -22,10 +23,24 @@ public class CharacterCrouchPunchState : CharacterBaseState
 
     public override void OnCollisionEnter(CharacterStateManager character, Collision collision)
     {
+        GameObject other = collision.gameObject;
+        if (other.CompareTag("Player"))
+        {
+            if (step == 1)
+            {
+                if (!AppliedDamage)
+                {
+                    collision.gameObject.GetComponent<CharacterStateManager>().TakeDamage(10);
+                }
+                AppliedDamage = true; 
+            }
+        }
     }
 
     public override void UpdateState(CharacterStateManager character)
     {
+        character.transform.position = new Vector3(character.transform.position.x, 2.5f, character.transform.position.z);
+   
         if (step == 0)
         {
             character.transform.rotation = Quaternion.Slerp(character.transform.rotation,
@@ -49,7 +64,7 @@ public class CharacterCrouchPunchState : CharacterBaseState
         }
         else if (step == 2)
         {
-            character.Arm1.transform.localPosition = new Vector3(-0.3855231f, -0.05800009f, -0.7084469f);
+            character.Arm1.transform.localPosition = new Vector3(0, -0.3f, -0.8f);
             character.Arm1.transform.localRotation = Quaternion.Euler(0, 0, 0);
 
             character.ShowEyebrows(false);
@@ -58,8 +73,20 @@ public class CharacterCrouchPunchState : CharacterBaseState
         }
     }
 
-    public override int TakeDamage(CharacterStateManager character, int Damage)
-    {
-        throw new System.NotImplementedException();
+    public override void TakeDamage(CharacterStateManager character, int Damage)
+    {   
+        // Interrupts attack 
+        if(step == 0)
+        {
+            character.Arm1.SetActive(true); 
+            character.Arm2.SetActive(false);
+            character.transform.rotation = Quaternion.Euler(StartRotation);
+            character.gameManager.TakeDamage(character.IsPlayer1, Damage); 
+            character.Arm1.transform.localPosition = new Vector3(0, -0.3f, -0.8f);
+            character.Arm1.transform.localRotation = Quaternion.Euler(0, 0, 0);
+
+            character.ShowEyebrows(false);
+            character.SwitchState(character.CharacterCrouchState);
+        }
     }
 }

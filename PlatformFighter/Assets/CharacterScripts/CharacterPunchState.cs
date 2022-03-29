@@ -30,7 +30,7 @@ public class CharacterPunchState : CharacterBaseState
             {
                 if (!AppliedDamage)
                 {
-                    collision.gameObject.GetComponent<CharacterStateManager>().TakeDamage(5);
+                    collision.gameObject.GetComponent<CharacterStateManager>().TakeDamage(2);
                 }
                 AppliedDamage = true; 
             }
@@ -66,17 +66,27 @@ public class CharacterPunchState : CharacterBaseState
         // Return to neutral
         else if(step == 2)
         {
-            character.Arm1.transform.localPosition = new Vector3(-0.3855231f, -0.05800009f, -0.7084469f);
+            character.Arm1.transform.localPosition = new Vector3(0, -0.3f, -0.8f);
             character.Arm1.transform.localRotation = Quaternion.Euler(0, 0, 0);
-
+            character.transform.rotation = Quaternion.Euler(StartRotation);
             character.ShowEyebrows(false);
-            character.SwitchState(character.CharacterMoveState);
-            
+            character.SwitchState(character.CharacterMoveState);            
         }
     }
 
-    public override int TakeDamage(CharacterStateManager character, int Damgae)
+    public override void TakeDamage(CharacterStateManager character, int Damgae)
     {
-        throw new System.NotImplementedException();
+        if(step == 0)
+        {
+            character.Arm2.SetActive(false);
+            character.Arm1.SetActive(true);
+            character.transform.rotation = Quaternion.Euler(StartRotation);
+            character.gameManager.TakeDamage(character.IsPlayer1, Damgae); 
+            character.Arm1.transform.localPosition = new Vector3(0, -0.3f, -0.8f);
+            character.Arm1.transform.localRotation = Quaternion.Euler(0, 0, 0);
+
+            character.ShowEyebrows(false);
+            character.SwitchState(character.CharacterCrouchState);
+        }
     }
 }

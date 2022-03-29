@@ -61,10 +61,22 @@ public class CharacterMoveState : CharacterBaseState
             rb.velocity = Vector3.zero;
             character.SwitchState(character.CharacterLegSweepState);
         }
+        //character.transform.position = new Vector3(character.transform.position.x, 4.5f, character.transform.position.z);
     }
 
-    public override int TakeDamage(CharacterStateManager character, int Damage)
+    public override void TakeDamage(CharacterStateManager character, int Damage)
     {
-        throw new System.NotImplementedException();
+        // Is blocking
+        if((character.IsPlayer1 && Input.GetKey(MoveLeft)) ||
+          ((!character.IsPlayer1 && Input.GetKey(MoveRight))))
+        {
+            character.gameManager.TakeDamage(character.IsPlayer1, Damage/5);
+            character.SwitchState(character.CharacterStandlockState);
+        }
+        // Not blocking 
+        else 
+        {
+            character.gameManager.TakeDamage(character.IsPlayer1, Damage);            
+        }
     }
 }

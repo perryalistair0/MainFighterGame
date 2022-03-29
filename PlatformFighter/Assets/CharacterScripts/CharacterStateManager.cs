@@ -12,7 +12,8 @@ public class CharacterStateManager : MonoBehaviour
 
     public CharacterBaseState CharacterCrouchState = new CharacterCrouchState();
     public CharacterBaseState CharcterCrouchPunchState = new CharacterCrouchPunchState();
-    
+    public CharacterBaseState CharacterStandlockState = new CharacterStandBlockState();
+    public CharacterBaseState CharacterDownState = new CharacterDownState();
     // Components 
     private Rigidbody rb;
 
@@ -23,7 +24,7 @@ public class CharacterStateManager : MonoBehaviour
     public GameObject Arm1;
     public GameObject Arm2;
     public GameObject Arm3; 
-
+    public GameObject LeftArm; 
     public GameObject Leg1;
     public GameObject Leg2;
 
@@ -37,7 +38,7 @@ public class CharacterStateManager : MonoBehaviour
     public string Kick = "k";
 
     // Other
-    private GameManager gameManager;
+    public GameManager gameManager;
     public bool IsPlayer1;
 
     // Start is called before the first frame update
@@ -55,6 +56,8 @@ public class CharacterStateManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
+        transform.position = new Vector3(transform.position.x, 4.5f, transform.position.z);
         currentState.UpdateState(this);
     }
     private void OnCollisionStay(Collision collision)
@@ -73,9 +76,13 @@ public class CharacterStateManager : MonoBehaviour
         Eyebrow2.SetActive(Show);
     }
     public void TakeDamage(int Damage)
-    {
-        Debug.Log("damage taken");
-        gameManager.TakeDamage(IsPlayer1, Damage);
+    {        
+        currentState.TakeDamage(this, Damage);
+        if(Damage==15 && currentState != CharacterCrouchState)
+        {
+            Debug.Log("Get down mr president");
+            SwitchState(CharacterDownState);
+        }
     }
     public Rigidbody GetRigidbody() { return rb; }
     public Transform GetTransform() { return transform; }
