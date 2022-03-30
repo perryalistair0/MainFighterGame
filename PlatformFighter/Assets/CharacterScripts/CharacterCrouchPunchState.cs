@@ -30,7 +30,7 @@ public class CharacterCrouchPunchState : CharacterBaseState
             {
                 if (!AppliedDamage)
                 {
-                    collision.gameObject.GetComponent<CharacterStateManager>().TakeDamage(10);
+                    collision.gameObject.GetComponent<CharacterStateManager>().TakeDamage(2);
                 }
                 AppliedDamage = true; 
             }

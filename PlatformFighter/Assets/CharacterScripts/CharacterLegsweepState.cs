@@ -24,7 +24,7 @@ public class CharacterLegsweepState : CharacterBaseState
         if (other.CompareTag("Player"))
         {
             Debug.Log("Playre");
-            if (Step == 0)
+            if (Step == 1)
             {
                 Debug.Log("Step");
                 if (!AppliedDamage)
@@ -46,6 +46,12 @@ public class CharacterLegsweepState : CharacterBaseState
     {
         if(Step == 0)
         {
+            character.transform.rotation = Quaternion.Slerp(character.transform.rotation,
+                                                           Quaternion.Euler(0, StartRotation.y + 45, 0), Time.deltaTime * TurnSpeed);
+            if (Quaternion.Angle(character.transform.rotation, Quaternion.Euler(0, StartRotation.y + 45, 0)) < 1) { Step++; }
+        }
+        if(Step == 1)
+        {
 
             character.SingleLeg.transform.localPosition = new Vector3(-0.68f, -1.66f, -1.5f);
             character.SingleLeg.transform.localRotation = Quaternion.Euler(-11.169f, 21.959f, 35.677f);
@@ -54,7 +60,7 @@ public class CharacterLegsweepState : CharacterBaseState
                                                            Quaternion.Euler(0, StartRotation.y -45, 0), Time.deltaTime * TurnSpeed);
             if (Quaternion.Angle(character.transform.rotation, Quaternion.Euler(0, StartRotation.y-45, 0)) < 1) { Step++; }
         }
-        if(Step == 1)
+        if(Step == 2)
         {
             character.SingleLeg.transform.localPosition = new Vector3(-1.153821f, -2.46f, -1.504989f);
             character.SingleLeg.transform.rotation = Quaternion.Euler(0f, 25f, 0f);

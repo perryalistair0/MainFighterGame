@@ -13,6 +13,7 @@ public class CharacterStateManager : MonoBehaviour
     public CharacterBaseState CharacterCrouchState = new CharacterCrouchState();
     public CharacterBaseState CharcterCrouchPunchState = new CharacterCrouchPunchState();
     public CharacterBaseState CharacterStandlockState = new CharacterStandBlockState();
+    public CharacterBaseState CharacterCrouchAndBlockState = new CharacterCrouchBlockState();
     public CharacterBaseState CharacterDownState = new CharacterDownState();
     // Components 
     private Rigidbody rb;
@@ -78,7 +79,7 @@ public class CharacterStateManager : MonoBehaviour
     public void TakeDamage(int Damage)
     {        
         currentState.TakeDamage(this, Damage);
-        if(Damage==15 && currentState != CharacterCrouchState)
+        if(Damage==15 && (currentState != CharacterCrouchState && currentState != CharacterCrouchAndBlockState))
         {
             Debug.Log("Get down mr president");
             SwitchState(CharacterDownState);

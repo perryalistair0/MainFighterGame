@@ -228,17 +228,17 @@ PrefabInstance:
     - target: {fileID: 4805975150797631648, guid: e73d6fdb9a94fb640b63f0f030921142,
         type: 3}
       propertyPath: MoveLeft
-      value: b
+      value: left
       objectReference: {fileID: 0}
     - target: {fileID: 4805975150797631648, guid: e73d6fdb9a94fb640b63f0f030921142,
         type: 3}
       propertyPath: MoveRight
-      value: m
+      value: right
       objectReference: {fileID: 0}
     - target: {fileID: 4805975150797631648, guid: e73d6fdb9a94fb640b63f0f030921142,
         type: 3}
       propertyPath: Crouch
-      value: n
+      value: down
       objectReference: {fileID: 0}
     - target: {fileID: 4805975150797631648, guid: e73d6fdb9a94fb640b63f0f030921142,
         type: 3}
