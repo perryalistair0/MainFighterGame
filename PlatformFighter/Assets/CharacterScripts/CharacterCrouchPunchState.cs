@@ -12,6 +12,7 @@ public class CharacterCrouchPunchState : CharacterBaseState
     public Vector3 StartRotation = Vector3.zero;
     public override void EnterState(CharacterStateManager character)
     {
+        character.currentEnum = CharacterStateManager.States.CharcterCrouchPunchState;
         AppliedDamage = false; 
 
         step = 0;
@@ -89,4 +90,5 @@ public class CharacterCrouchPunchState : CharacterBaseState
             character.SwitchState(character.CharacterCrouchState);
         }
     }
+    public override void AIinput (CharacterStateManager character, string input){}
 }

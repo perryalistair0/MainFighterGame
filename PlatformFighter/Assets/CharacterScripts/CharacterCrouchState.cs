@@ -8,6 +8,7 @@ public class CharacterCrouchState : CharacterBaseState
     public string Punch = "j";
     public override void EnterState(CharacterStateManager character)
     {
+        character.currentEnum = CharacterStateManager.States.CharacterCrouchState;
         Crouch = character.Crouch;
         Punch = character.Punch;
 
@@ -30,20 +31,35 @@ public class CharacterCrouchState : CharacterBaseState
 
     public override void UpdateState(CharacterStateManager character)
     {
+        /*
         if (Input.GetKeyDown(Punch))
-        {
-            Debug.Log("Crouch PUnch");
+        { 
             character.SwitchState(character.CharcterCrouchPunchState);
         }
         if (!Input.GetKey(Crouch))
         {
-            Debug.Log("Crouch let go");
             character.Leg1.SetActive(true);
             character.Leg2.SetActive(false);
             character.transform.position = new Vector3(character.transform.position.x, 3f, character.transform.position.z);
             character.SwitchState(character.CharacterMoveState);
         }
-        
+        */
         character.transform.position = new Vector3(character.transform.position.x, 2.5f, character.transform.position.z);
+    }
+    public override void AIinput (CharacterStateManager character, string input)
+    {
+        // punch
+        if(input == "j")
+        {
+            character.SwitchState(character.CharcterCrouchPunchState);
+        }
+        // stop crouch 
+        if (input == "s")
+        {
+            character.Leg1.SetActive(true);
+            character.Leg2.SetActive(false);
+            character.transform.position = new Vector3(character.transform.position.x, 3f, character.transform.position.z);
+            character.SwitchState(character.CharacterMoveState);
+        }
     }
 }

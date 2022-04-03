@@ -8,5 +8,6 @@ public abstract class CharacterBaseState
     public abstract void UpdateState(CharacterStateManager character);
     public abstract void OnCollisionEnter(CharacterStateManager character, Collision collision);
     public abstract void TakeDamage(CharacterStateManager character, int Damage);
+    public abstract void AIinput (CharacterStateManager character, string input);
 
 }

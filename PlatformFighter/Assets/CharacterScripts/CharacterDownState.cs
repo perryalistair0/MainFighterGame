@@ -11,6 +11,7 @@ public class CharacterDownState : CharacterBaseState
     public float EndFallTime; 
     public override void EnterState(CharacterStateManager character)
     {
+        character.currentEnum = CharacterStateManager.States.CharacterDownState;
         EndFallTime = Time.time + FallSpeed;
         step = 0;
         StartRotation = character.transform.rotation.eulerAngles;
@@ -31,12 +32,7 @@ public class CharacterDownState : CharacterBaseState
             character.SwitchState(character.CharacterMoveState); 
         }
     }
-    public override void OnCollisionEnter(CharacterStateManager character, Collision collision)
-    {
-
-    }
-    public override void TakeDamage(CharacterStateManager character, int Damage)
-    {
-
-    }
+    public override void OnCollisionEnter(CharacterStateManager character, Collision collision){}
+    public override void TakeDamage(CharacterStateManager character, int Damage){}
+    public override void AIinput (CharacterStateManager character, string input){}
 }

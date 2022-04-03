@@ -14,17 +14,23 @@ public class GameManager : MonoBehaviour
 
     public float MaxPlayerHealth = 100;
 
-    private float Player1Health;
-    private float Player2Health;
+    public float Player1Health;
+    public float Player2Health;
 
     private void Start()
     {
+        
         MaxHealthBarWidth = HealthBar1.GetComponent<RectTransform>().rect.width;
+        Restart();
+    }
+    public void Restart()
+    {
+        HealthBar1.rectTransform.sizeDelta = new Vector2(MaxHealthBarWidth, HealthBar1.rectTransform.sizeDelta.y);
+        HealthBar2.rectTransform.sizeDelta = new Vector2(MaxHealthBarWidth, HealthBar2.rectTransform.sizeDelta.y);
 
         Player1Health = MaxPlayerHealth;
         Player2Health = MaxPlayerHealth;
     }
-
     // isPlayer1: Is player 1 taking the damage? 
     // Damage: amount of damage applied
     public void TakeDamage(bool isPlayer1, int Damage)
@@ -41,9 +47,6 @@ public class GameManager : MonoBehaviour
             Player2Health -= Damage;
             HealthBar2.rectTransform.sizeDelta = new Vector2((Player2Health / MaxPlayerHealth) * MaxHealthBarWidth,
                                                              HealthBar2.rectTransform.sizeDelta.y);
-
-            
-
         }
     }
 }

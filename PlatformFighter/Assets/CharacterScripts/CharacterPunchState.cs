@@ -13,6 +13,7 @@ public class CharacterPunchState : CharacterBaseState
     private bool AppliedDamage = false; 
     public override void EnterState(CharacterStateManager character)
     {
+        character.currentEnum = CharacterStateManager.States.CharacterPunchState;
         AppliedDamage = false;
         step = 0;
         Arm = character.GetTransform().Find("Arm1");
@@ -89,4 +90,5 @@ public class CharacterPunchState : CharacterBaseState
             character.SwitchState(character.CharacterCrouchState);
         }
     }
+    public override void AIinput (CharacterStateManager character, string input){}
 }

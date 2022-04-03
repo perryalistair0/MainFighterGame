@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class CharacterStateManager : MonoBehaviour
 {
-    // Character states
-    CharacterBaseState currentState; 
+    // Character state scripts
+    public CharacterBaseState currentState; 
+  
     public CharacterBaseState CharacterMoveState = new CharacterMoveState();
     public CharacterBaseState CharacterPunchState = new CharacterPunchState();
     public CharacterBaseState CharacterLegSweepState = new CharacterLegsweepState();
@@ -15,6 +16,21 @@ public class CharacterStateManager : MonoBehaviour
     public CharacterBaseState CharacterStandlockState = new CharacterStandBlockState();
     public CharacterBaseState CharacterCrouchAndBlockState = new CharacterCrouchBlockState();
     public CharacterBaseState CharacterDownState = new CharacterDownState();
+    
+    // enum of states (for AI)
+    public enum States 
+    {
+        CharacterMoveState,
+        CharacterPunchState,
+        CharacterLegSweepState,
+        CharacterCrouchState,
+        CharcterCrouchPunchState,
+        CharacterStandlockState,
+        CharacterCrouchAndBlockState,
+        CharacterDownState,
+        CharacterLastState
+    }
+    public States currentEnum;
     // Components 
     private Rigidbody rb;
 
@@ -48,16 +64,14 @@ public class CharacterStateManager : MonoBehaviour
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         ShowEyebrows(false);    
         rb = GetComponent<Rigidbody>();
-
+        currentEnum = States.CharacterMoveState;
         currentState = CharacterMoveState;
-
         currentState.EnterState(this);      
     }
 
     // Update is called once per frame
     void Update()
-    {
-        
+    {   
         transform.position = new Vector3(transform.position.x, 4.5f, transform.position.z);
         currentState.UpdateState(this);
     }
@@ -69,7 +83,7 @@ public class CharacterStateManager : MonoBehaviour
     public void SwitchState(CharacterBaseState state)
     {
         currentState = state;
-        currentState.EnterState(this);
+        currentState.EnterState(this);        
     }
     public void ShowEyebrows(bool Show)
     {
@@ -81,7 +95,6 @@ public class CharacterStateManager : MonoBehaviour
         currentState.TakeDamage(this, Damage);
         if(Damage==15 && (currentState != CharacterCrouchState && currentState != CharacterCrouchAndBlockState))
         {
-            Debug.Log("Get down mr president");
             SwitchState(CharacterDownState);
         }
     }

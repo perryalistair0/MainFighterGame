@@ -8,6 +8,7 @@ public class CharacterCrouchBlockState : CharacterBaseState
     float BlockDuration = 0.5f;
     public override void EnterState(CharacterStateManager character)
     {
+        character.currentEnum = CharacterStateManager.States.CharacterCrouchAndBlockState;
         character.Arm1.SetActive(false);
         character.LeftArm.SetActive(false);
         character.Arm3.SetActive(true);
@@ -26,12 +27,8 @@ public class CharacterCrouchBlockState : CharacterBaseState
         }
         character.transform.position = new Vector3(character.transform.position.x, 2.5f, character.transform.position.z);
     }
-    public override void OnCollisionEnter(CharacterStateManager character, Collision collision)
-    {
-
-    }
-    public override void TakeDamage(CharacterStateManager character, int Damage)
-    {
-    }
+    public override void OnCollisionEnter(CharacterStateManager character, Collision collision){}
+    public override void TakeDamage(CharacterStateManager character, int Damage){}
+     public override void AIinput (CharacterStateManager character, string input){}
 
 }

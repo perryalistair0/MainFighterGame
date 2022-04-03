@@ -10,6 +10,9 @@ public class CharacterLegsweepState : CharacterBaseState
     public Vector3 StartRotation = Vector3.zero; 
     public override void EnterState(CharacterStateManager character)
     {
+        // Debug.Log("Enter leg sweep");
+        character.currentEnum = CharacterStateManager.States.CharacterLegSweepState;
+        // Debug.Log("Current enum" + character.currentEnum);
         AppliedDamage = false;
 
         character.ShowEyebrows(true);
@@ -23,13 +26,11 @@ public class CharacterLegsweepState : CharacterBaseState
         GameObject other = collision.gameObject;
         if (other.CompareTag("Player"))
         {
-            Debug.Log("Playre");
             if (Step == 1)
             {
-                Debug.Log("Step");
                 if (!AppliedDamage)
                 {
-                    Debug.Log("AppliedDamage ");
+
                     collision.gameObject.GetComponent<CharacterStateManager>().TakeDamage(15);
                 }
                 AppliedDamage = true; 
@@ -39,7 +40,8 @@ public class CharacterLegsweepState : CharacterBaseState
 
     public override void TakeDamage(CharacterStateManager character, int Damage)
     {
-        throw new System.NotImplementedException();
+        character.SingleLeg.transform.localPosition = new Vector3(-1.153821f, -2.46f, -1.504989f);
+        character.SingleLeg.transform.rotation = Quaternion.Euler(0f, 25f, 0f);
     }
 
     public override void UpdateState(CharacterStateManager character)
@@ -73,6 +75,6 @@ public class CharacterLegsweepState : CharacterBaseState
                 character.SwitchState(character.CharacterMoveState);
             }
         }
-
     }
+    public override void AIinput (CharacterStateManager character, string input) {}
 }
