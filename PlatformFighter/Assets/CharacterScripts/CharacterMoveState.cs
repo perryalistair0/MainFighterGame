@@ -93,13 +93,13 @@ public class CharacterMoveState : CharacterBaseState
         {
             // forward 
             case "d":
-                if(rb.velocity.x > 0)
+                if(rb.velocity.x == AISpeed)
                 {
                     rb.velocity = Vector3.zero;
                 }
                 else
                 {
-                rb.velocity = new Vector3(AISpeed, 0, 0);
+                    rb.velocity = new Vector3(AISpeed, 0, 0);
                 }
                 break;
             // down
@@ -109,13 +109,13 @@ public class CharacterMoveState : CharacterBaseState
                 break;
             // back
             case "a":
-                if(rb.velocity.x < 0)
+                if(rb.velocity.x == -AISpeed)
                 {
                     rb.velocity = Vector3.zero;
                 }
                 else
                 {
-                rb.velocity = new Vector3(-AISpeed, 0, 0);
+                    rb.velocity = new Vector3(-AISpeed, 0, 0);
                 }
                 break;
             // punch

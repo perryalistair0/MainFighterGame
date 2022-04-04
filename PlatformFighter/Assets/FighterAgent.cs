@@ -7,7 +7,7 @@ using Unity.MLAgents.Actuators;
 
 public class FighterAgent : Agent
 {
-    private float Timelimit = 10f; 
+    private float Timelimit = 30f; 
     private float EndEpisodeTime;
     public CharacterStateManager enemyfighter;
     GameManager gameManager;
@@ -34,7 +34,7 @@ public class FighterAgent : Agent
         }
         EndEpisodeTime = Time.time + Timelimit;
     }
-    void Update()
+    void FixedUpdate()
     {
         if(Time.time > EndEpisodeTime)
         {
@@ -80,9 +80,21 @@ public class FighterAgent : Agent
         {
             EndEpisode();
         }
+        /*
+        if(IsPlayer1 && GetComponent<Rigidbody>().velocity.x == 10)
+        {
+            Debug.Log("Rewarded going forward");
+            AddReward(0.1f);
+        }
+        else if (!IsPlayer1 && GetComponent<Rigidbody>().velocity.x == -10)
+        {
+            AddReward(0.1f);
+        }
+        */
 
         float distance = Vector3.Distance(transform.position, enemyfighter.transform.position);
-        AddReward(-0.001f * distance);        
+        Debug.Log("Distance; " + distance + " reward, " + (0.1f / distance));
+        AddReward(0.1f / distance);
     }
     public override void Heuristic(in ActionBuffers actionsOut)
     {
