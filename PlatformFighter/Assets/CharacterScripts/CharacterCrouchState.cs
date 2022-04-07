@@ -31,18 +31,18 @@ public class CharacterCrouchState : CharacterBaseState
 
     public override void UpdateState(CharacterStateManager character)
     {
-        /*
+     /*
         if (Input.GetKeyDown(Punch))
         { 
             character.SwitchState(character.CharcterCrouchPunchState);
-        }
+        }   1
         if (!Input.GetKey(Crouch))
         {
             character.Leg1.SetActive(true);
             character.Leg2.SetActive(false);
             character.transform.position = new Vector3(character.transform.position.x, 3f, character.transform.position.z);
             character.SwitchState(character.CharacterMoveState);
-        }
+        } 
         */
         character.transform.position = new Vector3(character.transform.position.x, 2.5f, character.transform.position.z);
     }

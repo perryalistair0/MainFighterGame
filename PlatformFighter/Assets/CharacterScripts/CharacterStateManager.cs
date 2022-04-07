@@ -57,6 +57,7 @@ public class CharacterStateManager : MonoBehaviour
     // Other
     public GameManager gameManager;
     public bool IsPlayer1;
+    public Quaternion startRotation; 
 
     // Start is called before the first frame update
     void Start()
@@ -66,6 +67,7 @@ public class CharacterStateManager : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         currentEnum = States.CharacterMoveState;
         currentState = CharacterMoveState;
+        startRotation = transform.rotation;
         currentState.EnterState(this);      
     }
 
@@ -93,7 +95,7 @@ public class CharacterStateManager : MonoBehaviour
     public void TakeDamage(int Damage)
     {        
         currentState.TakeDamage(this, Damage);
-        if(Damage==15 && (currentState != CharacterCrouchState && currentState != CharacterCrouchAndBlockState))
+        if(Damage==15 && (currentState != CharacterCrouchState && currentState != CharacterCrouchAndBlockState && currentState != CharcterCrouchPunchState))
         {
             SwitchState(CharacterDownState);
         }

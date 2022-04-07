@@ -5,16 +5,24 @@ using UnityEngine;
 public class CharacterDownState : CharacterBaseState
 {
     public float FallSpeed = 2f; 
-    public Vector3 StartRotation = Vector3.zero;
     private int step = 0;
 
     public float EndFallTime; 
     public override void EnterState(CharacterStateManager character)
     {
+        // Resetting everything 
+        character.Arm1.SetActive(true);
+        character.Arm2.SetActive(false);
+        character.Arm1.transform.localPosition = new Vector3(0, -0.3f, -0.8f);
+        character.Arm1.transform.localRotation = Quaternion.Euler(0, 0, 0);
+        character.transform.rotation = character.startRotation;
+        character.ShowEyebrows(false);
+        character.SingleLeg.transform.localPosition = new Vector3(-1.153821f, -2.46f, -1.504989f);
+        character.SingleLeg.transform.rotation = Quaternion.Euler(0f, 25f, 0f);
+
         character.currentEnum = CharacterStateManager.States.CharacterDownState;
         EndFallTime = Time.time + FallSpeed;
         step = 0;
-        StartRotation = character.transform.rotation.eulerAngles;
     }
     public override void UpdateState(CharacterStateManager character)
     {
@@ -22,13 +30,13 @@ public class CharacterDownState : CharacterBaseState
         if(step==0)
         {
             character.transform.rotation = Quaternion.Slerp(character.transform.rotation, 
-                                                  Quaternion.Euler(StartRotation.x - 90, 0, 0), Time.deltaTime * FallSpeed);
-            if(Quaternion.Angle(character.transform.rotation, Quaternion.Euler(StartRotation.x - 90, 0, 0)) < 1){step++;}
+                                                  Quaternion.Euler(character.startRotation.x - 90, 0, 0), Time.deltaTime * FallSpeed);
+            if(Quaternion.Angle(character.transform.rotation, Quaternion.Euler(character.startRotation.x - 90, 0, 0)) < 1){step++;}
         }
         if(step == 1 || Time.time>EndFallTime)
         {
             character.transform.position = new Vector3(character.transform.position.x, 4, -character.transform.position.z);
-            character.transform.rotation = Quaternion.Euler(StartRotation);   
+            character.transform.rotation = character.startRotation;   
             character.SwitchState(character.CharacterMoveState); 
         }
     }

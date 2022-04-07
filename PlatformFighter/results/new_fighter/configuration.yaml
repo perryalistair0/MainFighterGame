@@ -60,7 +60,7 @@ behaviors:
     threaded: false
     self_play: null
     behavioral_cloning:
-      demo_path: Assets/Demonstrations/
+      demo_path: Assets/Demonstrations/MoveBack.demo
       steps: 0
       strength: 0.5
       samples_per_update: 0
@@ -86,11 +86,11 @@ engine_settings:
   no_graphics: false
 environment_parameters: null
 checkpoint_settings:
-  run_id: fighter
+  run_id: new_fighter
   initialize_from: null
   load_model: false
   resume: false
-  force: true
+  force: false
   train_model: false
   inference: false
   results_dir: results

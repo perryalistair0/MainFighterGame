@@ -7,8 +7,7 @@ using Unity.MLAgents.Actuators;
 
 public class FighterAgent : Agent
 {
-    private float Timelimit = 30f; 
-    private float EndEpisodeTime;
+    string CurrentFSMInput = "";
     public CharacterStateManager enemyfighter;
     GameManager gameManager;
     CharacterStateManager character;
@@ -32,21 +31,8 @@ public class FighterAgent : Agent
         {
             startPos = new Vector3(5, 4, 0);
         }
-        EndEpisodeTime = Time.time + Timelimit;
+        
     }
-    void FixedUpdate()
-    {
-        if(Time.time > EndEpisodeTime)
-        {
-            Debug.Log("Restarting, " + "IsPLayer1 " + IsPlayer1 + ", "+ GetCumulativeReward());
-            if(IsPlayer1){
-                Debug.Log("Player 1 " + gameManager.Player1Health + ", Player 2 health "  +  gameManager.Player2Health);
-            }
-            EndEpisode();
-            EndEpisodeTime = Time.time + Timelimit;
-        }
-    }
-
     public override void OnEpisodeBegin()
     {
         rb.velocity = Vector3.zero;
@@ -76,10 +62,6 @@ public class FighterAgent : Agent
         if(input == 3) { character.currentState.AIinput(character, "d"); }
         if(input == 4) { character.currentState.AIinput(character, "j"); }
         if(input == 5) { character.currentState.AIinput(character, "k"); }
-        if(gameManager.Player1Health < 0 || gameManager.Player2Health < 0)
-        {
-            EndEpisode();
-        }
         /*
         if(IsPlayer1 && GetComponent<Rigidbody>().velocity.x == 10)
         {
@@ -93,31 +75,45 @@ public class FighterAgent : Agent
         */
 
         float distance = Vector3.Distance(transform.position, enemyfighter.transform.position);
-        Debug.Log("Distance; " + distance + " reward, " + (0.1f / distance));
-        AddReward(0.1f / distance);
+//        Debug.Log("Distance; " + distance + " reward, " + (0.1f / distance));
+        if(distance > 3f)
+        {
+            Debug.Log("Too far 0.0");
+            AddReward(-0.0001f);
+        }
     }
     public override void Heuristic(in ActionBuffers actionsOut)
     {
         var discreteActionsOut = actionsOut.DiscreteActions;
-        if(Input.GetKeyDown("y")){
+        if(CurrentFSMInput == "a"){
             discreteActionsOut[0] = 1;
         }
-        if(Input.GetKeyDown("u")){
+        if(CurrentFSMInput == "s"){
             discreteActionsOut[0] = 2;
         }
-        if(Input.GetKeyDown("i")){
+        if(CurrentFSMInput == "d"){
             discreteActionsOut[0] = 3;
         }
-        if(Input.GetKeyDown("o")){
+        if(CurrentFSMInput == "j"){
             discreteActionsOut[0] = 4;
         }
-        if(Input.GetKeyDown("p")){
+        if(CurrentFSMInput == "k"){
             discreteActionsOut[0] = 5;
         }
 
     }
+    public void GameOver()
+    {
+        EndEpisode();
+    }
+
+    public void FSMInput(string input)
+    {
+        CurrentFSMInput = input; 
+    }
     public void DamageEnemy(int Damage)
     {
+        Debug.Log("Damage: " + Damage/15);
         AddReward(Damage/15);
     }
     public void DamagePlayer(int Damage)

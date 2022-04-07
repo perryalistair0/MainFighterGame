@@ -216,8 +216,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.8446782, y: 1.339243, z: 3.1105137}
-  m_Center: {x: 0.42233905, y: -0.16962661, z: 0.7778372}
+  m_Size: {x: 3.102974, y: 1.339243, z: 3.1105137}
+  m_Center: {x: -0.20680885, y: -0.16962661, z: 0.7778372}
 --- !u!1 &4805975149938570333
 GameObject:
   m_ObjectHideFlags: 0
@@ -940,6 +940,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51ca98d4c1ba3c74e8285f2fc293d117, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentEnum: 0
   Eyebrow1: {fileID: 4805975150768667649}
   Eyebrow2: {fileID: 4805975150479087977}
   Arm1: {fileID: 4805975149885479634}
@@ -956,6 +957,7 @@ MonoBehaviour:
   Kick: k
   gameManager: {fileID: 0}
   IsPlayer1: 0
+  startRotation: {x: 0, y: 0, z: 0, w: 0}
 --- !u!75 &4811508816863254134
 ConstantForce:
   m_ObjectHideFlags: 0

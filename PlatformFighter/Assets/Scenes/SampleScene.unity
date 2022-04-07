@@ -345,6 +345,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51ca98d4c1ba3c74e8285f2fc293d117, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &577363625
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 577363620}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 039657d0f1ee7a2439efcedef9269487, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &577363626
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -366,7 +378,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 577363620}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2d934c2659a8802449e1618be519e8c8, type: 3}
   m_Name: 
@@ -400,7 +412,7 @@ MonoBehaviour:
     hasUpgradedBrainParametersWithActionSpec: 1
   m_Model: {fileID: 0}
   m_InferenceDevice: 0
-  m_BehaviorType: 0
+  m_BehaviorType: 1
   m_BehaviorName: Fighter
   TeamId: 1
   m_UseChildSensors: 1
@@ -485,6 +497,35 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DecisionPeriod: 1
   TakeActionsBetweenDecisions: 1
+--- !u!114 &623200813
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 623200805}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2d3cca1d8ce6fd4ea572551b161d8d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Enemy: {fileID: 577363623}
+--- !u!114 &623200814
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 623200805}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2902496c0120472b90269f94a0aec7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Record: 1
+  NumStepsToRecord: 0
+  DemonstrationName: Demo1
+  DemonstrationDirectory: 
 --- !u!1 &632901105 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6483868750027328458, guid: e73d6fdb9a94fb640b63f0f030921142,
@@ -836,7 +877,7 @@ Transform:
   m_GameObject: {fileID: 922898364}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -16, y: 4, z: 0}
-  m_LocalScale: {x: 0.1, y: 3, z: 1}
+  m_LocalScale: {x: 0.1, y: 5, z: 5}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 9
@@ -1299,7 +1340,7 @@ Transform:
   m_GameObject: {fileID: 1879783437}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 16, y: 4, z: 0}
-  m_LocalScale: {x: 0.1, y: 3, z: 1}
+  m_LocalScale: {x: 0.1, y: 5, z: 5}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 10

@@ -16,10 +16,13 @@ public class GameManager : MonoBehaviour
 
     public float Player1Health;
     public float Player2Health;
-
+    public FighterAgent agent1;
+    public FighterAgent agent2; 
+    float EndEpisodeTime;
+    public float Timelimit = 20f; 
     private void Start()
     {
-        
+        EndEpisodeTime = Time.time + Timelimit;
         MaxHealthBarWidth = HealthBar1.GetComponent<RectTransform>().rect.width;
         Restart();
     }
@@ -40,13 +43,31 @@ public class GameManager : MonoBehaviour
             Player1Health -= Damage;        
             HealthBar1.rectTransform.sizeDelta = new Vector2((Player1Health / MaxPlayerHealth) * MaxHealthBarWidth,
                                                              HealthBar1.rectTransform.sizeDelta.y);
-
+            agent1.DamageEnemy(Damage);
+            agent2.DamagePlayer(Damage);
         }
         else
         {
             Player2Health -= Damage;
             HealthBar2.rectTransform.sizeDelta = new Vector2((Player2Health / MaxPlayerHealth) * MaxHealthBarWidth,
                                                              HealthBar2.rectTransform.sizeDelta.y);
+            agent1.DamagePlayer(Damage);
+            agent2.DamageEnemy(Damage);
+        }
+    }
+    void Update()
+    {
+         if(Player1Health < 0 || Player2Health < 0)
+        {
+            agent1.GameOver();
+            agent2.GameOver();
+            EndEpisodeTime = Time.time + Timelimit;
+        }
+        if(Time.time > EndEpisodeTime)
+        {
+            agent1.GameOver();
+            agent2.GameOver();
+            EndEpisodeTime = Time.time + Timelimit;
         }
     }
 }

@@ -67,7 +67,7 @@ public class CharacterMoveState : CharacterBaseState
         {
             rb.velocity = Vector3.zero;
             character.SwitchState(character.CharacterLegSweepState);
-        }
+        } 
         */
         //character.transform.position = new Vector3(character.transform.position.x, 4.5f, character.transform.position.z);
     }
@@ -81,7 +81,7 @@ public class CharacterMoveState : CharacterBaseState
             character.gameManager.TakeDamage(character.IsPlayer1, Damage/5);
             character.SwitchState(character.CharacterStandlockState);
         }
-        // Not blocking 
+        // Not blocking 1
         else 
         {
             character.gameManager.TakeDamage(character.IsPlayer1, Damage);            

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CharacterCrouchPunchState : CharacterBaseState
 {
-    public float PunchSpeed = 20f;
+    public float PunchSpeed = 30f;
     private Transform Arm;
     private int step = 0;
     bool AppliedDamage;
