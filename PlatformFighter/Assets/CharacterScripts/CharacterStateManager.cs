@@ -84,6 +84,7 @@ public class CharacterStateManager : MonoBehaviour
 
     public void SwitchState(CharacterBaseState state)
     {
+        ResetBodyParts();
         currentState = state;
         currentState.EnterState(this);        
     }
@@ -102,5 +103,18 @@ public class CharacterStateManager : MonoBehaviour
     }
     public Rigidbody GetRigidbody() { return rb; }
     public Transform GetTransform() { return transform; }
-    
-}
+    public void ResetBodyParts()
+    {
+        // Resetting everything 
+        Arm1.SetActive(true);
+        Arm2.SetActive(false);
+        Arm1.transform.localPosition = new Vector3(0, -0.3f, -0.8f);
+        Arm1.transform.localRotation = Quaternion.Euler(0, 0, 0);
+        transform.rotation = startRotation;
+        Leg1.SetActive(true);
+        Leg2.SetActive(false);
+        ShowEyebrows(false);
+        SingleLeg.transform.localPosition = new Vector3(-1.153821f, -2.46f, -1.504989f);
+        SingleLeg.transform.rotation = Quaternion.Euler(0f, 25f, 0f);
+    }
+    }

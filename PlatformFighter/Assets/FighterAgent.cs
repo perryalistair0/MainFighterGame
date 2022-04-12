@@ -53,6 +53,7 @@ public class FighterAgent : Agent
             sensor.AddObservation((int)enemyfighter.currentEnum == ci ? 1.0f : 0.0f);
         }
         sensor.AddObservation(Vector3.Distance(transform.position, enemyfighter.transform.position));
+        sensor.AddObservation(rb.velocity.x);
     }
     public override void OnActionReceived(ActionBuffers actionBuffers)
     {
@@ -84,6 +85,27 @@ public class FighterAgent : Agent
     }
     public override void Heuristic(in ActionBuffers actionsOut)
     {
+        if(IsPlayer1)
+        {
+            var discreteActionsOut = actionsOut.DiscreteActions;
+            if(Input.GetKeyDown("a"))
+            {
+                discreteActionsOut[0] = 1;
+            }
+            if(Input.GetKeyDown("d"))
+            {
+                discreteActionsOut[0] = 3;
+            }
+            if(Input.GetKeyDown("j"))
+            {
+                discreteActionsOut[0] = 4;
+            }
+        }
+
+        
+        /*
+        if(IsPlayer1)
+        {
         var discreteActionsOut = actionsOut.DiscreteActions;
         if(CurrentFSMInput == "a"){
             discreteActionsOut[0] = 1;
@@ -100,7 +122,8 @@ public class FighterAgent : Agent
         if(CurrentFSMInput == "k"){
             discreteActionsOut[0] = 5;
         }
-
+        CurrentFSMInput = "";
+        } */
     }
     public void GameOver()
     {
@@ -111,12 +134,12 @@ public class FighterAgent : Agent
     {
         CurrentFSMInput = input; 
     }
-    public void DamageEnemy(int Damage)
+    public void DamageEnemy(float Damage)
     {
         Debug.Log("Damage: " + Damage/15);
         AddReward(Damage/15);
     }
-    public void DamagePlayer(int Damage)
+    public void DamagePlayer(float Damage)
     {
         AddReward(-Damage/15);
     }

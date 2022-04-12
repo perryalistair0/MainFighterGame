@@ -3,22 +3,24 @@ behaviors:
   Fighter:
     trainer_type: ppo
     hyperparameters:
-      batch_size: 256
-      buffer_size: 1024
+      batch_size: 1024
+      buffer_size: 10240
       learning_rate: 0.0003
-      beta: 0.0005
+      beta: 0.005
       epsilon: 0.2
-      lambd: 0.99
+      lambd: 0.95
       num_epoch: 3
       learning_rate_schedule: linear
-      beta_schedule: linear
+      beta_schedule: constant
       epsilon_schedule: linear
     network_settings:
       normalize: false
       hidden_units: 128
       num_layers: 2
       vis_encode_type: simple
-      memory: null
+      memory:
+        sequence_length: 64
+        memory_size: 256
       goal_conditioning_type: hyper
       deterministic: false
     reward_signals:
@@ -35,7 +37,7 @@ behaviors:
           deterministic: false
       gail:
         gamma: 0.99
-        strength: 0.0
+        strength: 0.5
         network_settings:
           normalize: false
           hidden_units: 128
@@ -48,25 +50,19 @@ behaviors:
         encoding_size: null
         use_actions: false
         use_vail: false
-        demo_path: Assets/Demonstrations/Demo666.demo
+        demo_path: Assets/Demonstrations/FSMRecord_0.demo
     init_path: null
     keep_checkpoints: 5
-    checkpoint_interval: 500000
+    checkpoint_interval: 50000
     max_steps: 500000
     time_horizon: 64
-    summary_freq: 50000
+    summary_freq: 10000
     threaded: false
-    self_play:
-      save_steps: 50000
-      team_change: 100000
-      swap_steps: 2000
-      window: 10
-      play_against_latest_model_ratio: 0.5
-      initial_elo: 1200.0
+    self_play: null
     behavioral_cloning:
-      demo_path: Assets/Demonstrations/Demo666.demo
+      demo_path: Assets/Demonstrations/FSMRecord_0.demo
       steps: 0
-      strength: 0.0
+      strength: 0.5
       samples_per_update: 0
       num_epoch: null
       batch_size: null
@@ -90,11 +86,11 @@ engine_settings:
   no_graphics: false
 environment_parameters: null
 checkpoint_settings:
-  run_id: Fighter
+  run_id: Imitation
   initialize_from: null
   load_model: false
-  resume: true
-  force: false
+  resume: false
+  force: true
   train_model: false
   inference: false
   results_dir: results

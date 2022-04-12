@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.45007938, g: 0.49756956, b: 0.5617319, a: 1}
+  m_IndirectSpecularColor: {r: 0.4500798, g: 0.4975701, b: 0.56173307, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -378,7 +378,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 577363620}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2d934c2659a8802449e1618be519e8c8, type: 3}
   m_Name: 
@@ -401,7 +401,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BrainParameters:
-    VectorObservationSize: 17
+    VectorObservationSize: 18
     NumStackedVectorObservations: 1
     m_ActionSpec:
       m_NumContinuousActions: 0
@@ -412,7 +412,7 @@ MonoBehaviour:
     hasUpgradedBrainParametersWithActionSpec: 1
   m_Model: {fileID: 0}
   m_InferenceDevice: 0
-  m_BehaviorType: 1
+  m_BehaviorType: 0
   m_BehaviorName: Fighter
   TeamId: 1
   m_UseChildSensors: 1
@@ -466,7 +466,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BrainParameters:
-    VectorObservationSize: 17
+    VectorObservationSize: 18
     NumStackedVectorObservations: 1
     m_ActionSpec:
       m_NumContinuousActions: 0
@@ -504,7 +504,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 623200805}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b2d3cca1d8ce6fd4ea572551b161d8d1, type: 3}
   m_Name: 
@@ -522,9 +522,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2902496c0120472b90269f94a0aec7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Record: 1
+  Record: 0
   NumStepsToRecord: 0
-  DemonstrationName: Demo1
+  DemonstrationName: Demo666
   DemonstrationDirectory: 
 --- !u!1 &632901105 stripped
 GameObject:
@@ -785,7 +785,8 @@ Transform:
   m_LocalRotation: {x: -0.0017453891, y: 0, z: 0, w: 0.9999985}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 25, y: 1, z: 25}
-  m_Children: []
+  m_Children:
+  - {fileID: 1879783441}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: -0.2, y: 0, z: 0}
@@ -1167,11 +1168,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Player1: {fileID: 623200805}
   Player2: {fileID: 577363620}
+  Player1Manager: {fileID: 623200808}
+  Player2Manager: {fileID: 577363623}
   HealthBar1: {fileID: 1515255244}
   HealthBar2: {fileID: 712969383}
   MaxPlayerHealth: 100
   Player1Health: 0
   Player2Health: 0
+  agent1: {fileID: 623200806}
+  agent2: {fileID: 577363627}
+  Timelimit: 20
 --- !u!4 &1798039486
 Transform:
   m_ObjectHideFlags: 0
@@ -1338,12 +1344,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1879783437}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 16, y: 4, z: 0}
-  m_LocalScale: {x: 0.1, y: 5, z: 5}
+  m_LocalRotation: {x: 0.0017453891, y: -0, z: -0, w: 0.9999985}
+  m_LocalPosition: {x: 0.64, y: 3.9999757, z: 0.0005585237}
+  m_LocalScale: {x: 0.004, y: 4.9985385, z: 0.20000236}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_Father: {fileID: 781592101}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1904930227 stripped
 GameObject:
@@ -1442,7 +1448,7 @@ Transform:
   m_LocalScale: {x: 40, y: 4, z: 40}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &4805975151006046862
 PrefabInstance:

@@ -1,0 +1,47 @@
+{
+    "name": "root",
+    "metadata": {
+        "timer_format_version": "0.1.0",
+        "start_time_seconds": "1649532896",
+        "python_version": "3.7.9 (tags/v3.7.9:13c94747c7, Aug 17 2020, 18:58:18) [MSC v.1900 64 bit (AMD64)]",
+        "command_line_arguments": "C:\\Users\\Alistair\\Repos\\MainFighterGame\\PlatformFighter\\venv\\Scripts\\mlagents-learn",
+        "mlagents_version": "0.29.0",
+        "mlagents_envs_version": "0.29.0",
+        "communication_protocol_version": "1.5.0",
+        "pytorch_version": "1.7.0+cu110",
+        "numpy_version": "1.21.5",
+        "end_time_seconds": "1649532901"
+    },
+    "total": 5.091907900000001,
+    "count": 1,
+    "self": 0.004890900000000364,
+    "children": {
+        "run_training.setup": {
+            "total": 0.3226111000000005,
+            "count": 1,
+            "self": 0.3226111000000005
+        },
+        "TrainerController.start_learning": {
+            "total": 4.7644059,
+            "count": 1,
+            "self": 0.0004196000000007416,
+            "children": {
+                "TrainerController._reset_env": {
+                    "total": 4.763973,
+                    "count": 1,
+                    "self": 4.763973
+                },
+                "trainer_threads": {
+                    "total": 2.2999999984563146e-06,
+                    "count": 1,
+                    "self": 2.2999999984563146e-06
+                },
+                "TrainerController._save_models": {
+                    "total": 1.100000000064938e-05,
+                    "count": 1,
+                    "self": 1.100000000064938e-05
+                }
+            }
+        }
+    }
+}

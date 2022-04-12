@@ -7,7 +7,8 @@ public class GameManager : MonoBehaviour
 {
     public GameObject Player1;
     public GameObject Player2;
-    
+    public CharacterStateManager Player1Manager;
+    public CharacterStateManager Player2Manager;
     public RawImage HealthBar1;
     public RawImage HealthBar2;
     private float MaxHealthBarWidth;
@@ -30,7 +31,10 @@ public class GameManager : MonoBehaviour
     {
         HealthBar1.rectTransform.sizeDelta = new Vector2(MaxHealthBarWidth, HealthBar1.rectTransform.sizeDelta.y);
         HealthBar2.rectTransform.sizeDelta = new Vector2(MaxHealthBarWidth, HealthBar2.rectTransform.sizeDelta.y);
-
+        
+        Player1Manager.SwitchState(Player1Manager.CharacterMoveState);
+        Player2Manager.SwitchState(Player2Manager.CharacterMoveState);
+        
         Player1Health = MaxPlayerHealth;
         Player2Health = MaxPlayerHealth;
     }

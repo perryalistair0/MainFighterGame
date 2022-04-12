@@ -9,17 +9,7 @@ public class CharacterDownState : CharacterBaseState
 
     public float EndFallTime; 
     public override void EnterState(CharacterStateManager character)
-    {
-        // Resetting everything 
-        character.Arm1.SetActive(true);
-        character.Arm2.SetActive(false);
-        character.Arm1.transform.localPosition = new Vector3(0, -0.3f, -0.8f);
-        character.Arm1.transform.localRotation = Quaternion.Euler(0, 0, 0);
-        character.transform.rotation = character.startRotation;
-        character.ShowEyebrows(false);
-        character.SingleLeg.transform.localPosition = new Vector3(-1.153821f, -2.46f, -1.504989f);
-        character.SingleLeg.transform.rotation = Quaternion.Euler(0f, 25f, 0f);
-
+    {     
         character.currentEnum = CharacterStateManager.States.CharacterDownState;
         EndFallTime = Time.time + FallSpeed;
         step = 0;

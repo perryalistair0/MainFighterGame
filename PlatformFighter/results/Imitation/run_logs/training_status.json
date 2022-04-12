@@ -1,0 +1,29 @@
+{
+    "Fighter": {
+        "checkpoints": [
+            {
+                "steps": 10184,
+                "file_path": "results\\Imitation\\Fighter\\Fighter-10184.onnx",
+                "reward": null,
+                "creation_time": 1649356402.0783384,
+                "auxillary_file_paths": [
+                    "results\\Imitation\\Fighter\\Fighter-10184.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 10184,
+            "file_path": "results\\Imitation\\Fighter.onnx",
+            "reward": null,
+            "creation_time": 1649356402.0783384,
+            "auxillary_file_paths": [
+                "results\\Imitation\\Fighter\\Fighter-10184.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.28.0",
+        "torch_version": "1.7.0+cu110"
+    }
+}

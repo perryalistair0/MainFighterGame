@@ -26,13 +26,12 @@ public class FiniteStateMachine : MonoBehaviour
             float Distance = Mathf.Abs(transform.position.x - Enemy.transform.position.x);
             if(Distance > 2.5f) 
             { 
-                    if((character.IsPlayer1 && rb.velocity.x != 10)||
-                        !character.IsPlayer1 && rb.velocity.x != -10)
+                    if((character.IsPlayer1 && rb.velocity.x < 5)||
+                      (!character.IsPlayer1 && rb.velocity.x > -5))
                     {
                         agent.FSMInput("d");
                     }
             }
-
             // attack
             else
             {
