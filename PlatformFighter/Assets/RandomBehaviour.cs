@@ -7,7 +7,7 @@ public class RandomBehaviour : MonoBehaviour
     CharacterStateManager character;
     float actionInterval = 1f;
     float NextAction;
-    string[] Move_Actions = new string[] {"a"};
+    string[] Move_Actions = new string[] {"a", "d", "j", "k"};
     string[] Crouch_Actions = new string[] {"j", "s"};
     string RandomMove;
     int RandomIndex;

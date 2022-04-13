@@ -1,23 +1,24 @@
 {
     "Fighter": {
+        "elo": 1200.0,
         "checkpoints": [
             {
-                "steps": 10184,
-                "file_path": "results\\new_fighter\\Fighter\\Fighter-10184.onnx",
+                "steps": 2816,
+                "file_path": "results\\new_fighter\\Fighter\\Fighter-2816.onnx",
                 "reward": null,
-                "creation_time": 1649265185.525107,
+                "creation_time": 1649844721.30338,
                 "auxillary_file_paths": [
-                    "results\\new_fighter\\Fighter\\Fighter-10184.pt"
+                    "results\\new_fighter\\Fighter\\Fighter-2816.pt"
                 ]
             }
         ],
         "final_checkpoint": {
-            "steps": 10184,
+            "steps": 2816,
             "file_path": "results\\new_fighter\\Fighter.onnx",
             "reward": null,
-            "creation_time": 1649265185.525107,
+            "creation_time": 1649844721.30338,
             "auxillary_file_paths": [
-                "results\\new_fighter\\Fighter\\Fighter-10184.pt"
+                "results\\new_fighter\\Fighter\\Fighter-2816.pt"
             ]
         }
     },

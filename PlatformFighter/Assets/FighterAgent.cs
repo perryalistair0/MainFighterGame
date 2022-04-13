@@ -36,7 +36,7 @@ public class FighterAgent : Agent
     public override void OnEpisodeBegin()
     {
         rb.velocity = Vector3.zero;
-        transform.position = startPos;
+        transform.position = character.StartPosition;
         gameManager.Restart();
     
     }
@@ -59,7 +59,7 @@ public class FighterAgent : Agent
     {
         int input = actionBuffers.DiscreteActions[0];
         if(input == 1) { character.currentState.AIinput(character, "a"); }
-        if(input == 2) { character.currentState.AIinput(character, "s"); }
+        if(input == 2) { character.currentState.AIinput(character, "s"); Debug.Log("Crouched");}
         if(input == 3) { character.currentState.AIinput(character, "d"); }
         if(input == 4) { character.currentState.AIinput(character, "j"); }
         if(input == 5) { character.currentState.AIinput(character, "k"); }
@@ -92,6 +92,10 @@ public class FighterAgent : Agent
             {
                 discreteActionsOut[0] = 1;
             }
+            if(Input.GetKeyDown("s"))
+            {
+                discreteActionsOut[0] = 2;
+            }
             if(Input.GetKeyDown("d"))
             {
                 discreteActionsOut[0] = 3;
@@ -99,6 +103,10 @@ public class FighterAgent : Agent
             if(Input.GetKeyDown("j"))
             {
                 discreteActionsOut[0] = 4;
+            }
+            if(Input.GetKeyDown("k"))
+            {
+                discreteActionsOut[0] = 5; 
             }
         }
 

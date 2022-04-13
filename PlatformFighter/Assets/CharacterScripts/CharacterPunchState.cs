@@ -87,7 +87,11 @@ public class CharacterPunchState : CharacterBaseState
             character.Arm1.transform.localRotation = Quaternion.Euler(0, 0, 0);
 
             character.ShowEyebrows(false);
-            character.SwitchState(character.CharacterCrouchState);
+            character.SwitchState(character.CharacterMoveState);
+        }
+        else if(Damgae == 15)
+        {
+            character.gameManager.TakeDamage(character.IsPlayer1, Damgae); 
         }
     }
     public override void AIinput (CharacterStateManager character, string input){}

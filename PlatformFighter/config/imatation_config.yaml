@@ -19,10 +19,10 @@ behaviors:
         strength: 1.0
         gamma: 0.99
       gail:
-        strength: 0
+        strength: 0.5
         demo_path: Assets/Demonstrations/Demo666.demo
     behavioral_cloning: 
-      strength: 0
+      strength: 0.5
       demo_path: Assets/Demonstrations/Demo666.demo
       max_steps: 5000000
       time_horizon: 64

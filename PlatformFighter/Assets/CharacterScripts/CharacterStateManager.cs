@@ -55,9 +55,15 @@ public class CharacterStateManager : MonoBehaviour
     public string Kick = "k";
 
     // Other
+    public Vector3 StartPosition; 
     public GameManager gameManager;
     public bool IsPlayer1;
-    public Quaternion startRotation; 
+    public Vector3 startRotation; 
+    void Awake()
+    {
+        
+        startRotation = transform.localRotation.eulerAngles;
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -67,8 +73,9 @@ public class CharacterStateManager : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         currentEnum = States.CharacterMoveState;
         currentState = CharacterMoveState;
-        startRotation = transform.rotation;
+        
         currentState.EnterState(this);      
+        StartPosition = transform.position;
     }
 
     // Update is called once per frame
@@ -110,11 +117,12 @@ public class CharacterStateManager : MonoBehaviour
         Arm2.SetActive(false);
         Arm1.transform.localPosition = new Vector3(0, -0.3f, -0.8f);
         Arm1.transform.localRotation = Quaternion.Euler(0, 0, 0);
-        transform.rotation = startRotation;
+        // Debug.Log("Start rotation 2 " + startRotation);
+        transform.localRotation = Quaternion.Euler(startRotation);
         Leg1.SetActive(true);
         Leg2.SetActive(false);
         ShowEyebrows(false);
         SingleLeg.transform.localPosition = new Vector3(-1.153821f, -2.46f, -1.504989f);
         SingleLeg.transform.rotation = Quaternion.Euler(0f, 25f, 0f);
     }
-    }
+}

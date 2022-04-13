@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CharacterLegsweepState : CharacterBaseState
 {
-    public float TurnSpeed = 10f;
+    public float TurnSpeed = 7f;
     public int Step = 0;
     bool AppliedDamage = false;
     public Vector3 StartRotation = Vector3.zero; 

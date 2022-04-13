@@ -9,8 +9,11 @@ public class GameManager : MonoBehaviour
     public GameObject Player2;
     public CharacterStateManager Player1Manager;
     public CharacterStateManager Player2Manager;
-    public RawImage HealthBar1;
-    public RawImage HealthBar2;
+    //public RawImage HealthBar1;
+    // public RawImage HealthBar2;
+    public GameObject healthBar1;
+    public GameObject healthBar2; 
+    private Vector3 healthBarScale;
     private float MaxHealthBarWidth;
 
     public float MaxPlayerHealth = 100;
@@ -24,14 +27,20 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         EndEpisodeTime = Time.time + Timelimit;
-        MaxHealthBarWidth = HealthBar1.GetComponent<RectTransform>().rect.width;
+        healthBarScale = healthBar1.transform.localScale;
+        MaxHealthBarWidth = healthBarScale.x;
+        
+       //  MaxHealthBarWidth = HealthBar1.GetComponent<RectTransform>().rect.width;
         Restart();
     }
     public void Restart()
     {
-        HealthBar1.rectTransform.sizeDelta = new Vector2(MaxHealthBarWidth, HealthBar1.rectTransform.sizeDelta.y);
-        HealthBar2.rectTransform.sizeDelta = new Vector2(MaxHealthBarWidth, HealthBar2.rectTransform.sizeDelta.y);
-        
+       // HealthBar1.rectTransform.sizeDelta = new Vector2(MaxHealthBarWidth, HealthBar1.rectTransform.sizeDelta.y);
+       //  HealthBar2.rectTransform.sizeDelta = new Vector2(MaxHealthBarWidth, HealthBar2.rectTransform.sizeDelta.y);
+        healthBar1.transform.localScale = healthBarScale;    
+        healthBar2.transform.localScale = healthBarScale;  
+
+
         Player1Manager.SwitchState(Player1Manager.CharacterMoveState);
         Player2Manager.SwitchState(Player2Manager.CharacterMoveState);
         
@@ -45,16 +54,22 @@ public class GameManager : MonoBehaviour
         if (isPlayer1)
         {
             Player1Health -= Damage;        
-            HealthBar1.rectTransform.sizeDelta = new Vector2((Player1Health / MaxPlayerHealth) * MaxHealthBarWidth,
-                                                             HealthBar1.rectTransform.sizeDelta.y);
+            // HealthBar1.rectTransform.sizeDelta = new Vector2((Player1Health / MaxPlayerHealth) * MaxHealthBarWidth,
+              //                                               HealthBar1.rectTransform.sizeDelta.y);
+            healthBar1.transform.localScale = new Vector3((Player1Health / MaxPlayerHealth) * MaxHealthBarWidth, 
+                                                           healthBarScale.y,
+                                                           healthBarScale.z);
             agent1.DamageEnemy(Damage);
             agent2.DamagePlayer(Damage);
         }
         else
         {
             Player2Health -= Damage;
-            HealthBar2.rectTransform.sizeDelta = new Vector2((Player2Health / MaxPlayerHealth) * MaxHealthBarWidth,
-                                                             HealthBar2.rectTransform.sizeDelta.y);
+           // HealthBar2.rectTransform.sizeDelta = new Vector2((Player2Health / MaxPlayerHealth) * MaxHealthBarWidth,
+            //                                                HealthBar2.rectTransform.sizeDelta.y);
+            healthBar2.transform.localScale = new Vector3((Player2Health / MaxPlayerHealth) * MaxHealthBarWidth, 
+                                                           healthBarScale.y,
+                                                           healthBarScale.z);
             agent1.DamagePlayer(Damage);
             agent2.DamageEnemy(Damage);
         }

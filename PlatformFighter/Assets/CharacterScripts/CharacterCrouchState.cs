@@ -8,6 +8,7 @@ public class CharacterCrouchState : CharacterBaseState
     public string Punch = "j";
     public override void EnterState(CharacterStateManager character)
     {
+        // Debug.Log("Crouched");
         character.currentEnum = CharacterStateManager.States.CharacterCrouchState;
         Crouch = character.Crouch;
         Punch = character.Punch;
