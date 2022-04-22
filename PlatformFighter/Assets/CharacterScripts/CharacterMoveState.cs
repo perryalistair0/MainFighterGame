@@ -9,7 +9,7 @@ public class CharacterMoveState : CharacterBaseState
     public int Speed = 10;
     public int AISpeed = 10;
     public float PunchSpeed = 0.2f;
-
+    private string AIMove = "";
     // Controls 
     public string MoveLeft = "a";
     public string MoveRight = "d";
@@ -75,8 +75,7 @@ public class CharacterMoveState : CharacterBaseState
     public override void TakeDamage(CharacterStateManager character, int Damage)
     {
         // Is blocking
-        if((character.IsPlayer1 && Input.GetKey(MoveLeft)) ||
-          ((!character.IsPlayer1 && Input.GetKey(MoveRight))))
+        if(AIMove == "a")
         {
             character.gameManager.TakeDamage(character.IsPlayer1, Damage/5);
             character.SwitchState(character.CharacterStandlockState);
@@ -89,45 +88,37 @@ public class CharacterMoveState : CharacterBaseState
     }
     public override void AIinput (CharacterStateManager character, string input)
     {
+        AIMove = "";
         switch(input)
         {
             // forward 
             case "d":
-                if(rb.velocity.x == AISpeed)
-                {
-                    rb.velocity = Vector3.zero;
-                }
-                else
-                {
-                    rb.velocity = new Vector3(AISpeed, 0, 0);
-                }
+                character.transform.position += Vector3.right * AISpeed * Time.deltaTime;
+                AIMove = "d";
                 break;
             // down
             case "s":
                 rb.velocity = Vector3.zero;
                 character.SwitchState(character.CharacterCrouchState);  
+                AIMove = "s";
                 break;
             // back
             case "a":
-                if(rb.velocity.x == -AISpeed)
-                {
-                    rb.velocity = Vector3.zero;
-                }
-                else
-                {
-                    rb.velocity = new Vector3(-AISpeed, 0, 0);
-                }
+                character.transform.position += Vector3.right * -AISpeed * Time.deltaTime;
+                AIMove = "a";
                 break;
             // punch
             case "j":
                 rb.velocity = Vector3.zero;
                 character.SwitchState(character.CharacterPunchState);   
+                AIMove = "j";
                 break;
                 
             // kick
             case "k":
                 rb.velocity = Vector3.zero;
                 character.SwitchState(character.CharacterLegSweepState);  
+                AIMove = "k";
                 break;
         }
     }

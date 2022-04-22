@@ -1,62 +1,26 @@
 {
     "Fighter": {
+        "elo": 1200.0,
         "checkpoints": [
             {
-                "steps": 232598,
-                "file_path": "results\\Fighter\\Fighter\\Fighter-232598.onnx",
+                "steps": 162554,
+                "file_path": "results\\Fighter\\Fighter\\Fighter-162554.onnx",
                 "reward": null,
-                "creation_time": 1649612036.0535536,
+                "creation_time": 1650569086.4482057,
                 "auxillary_file_paths": [
-                    "results\\Fighter\\Fighter\\Fighter-232598.pt"
-                ]
-            },
-            {
-                "steps": 232918,
-                "file_path": "results\\Fighter\\Fighter\\Fighter-232918.onnx",
-                "reward": null,
-                "creation_time": 1649612080.9271557,
-                "auxillary_file_paths": [
-                    "results\\Fighter\\Fighter\\Fighter-232918.pt"
-                ]
-            },
-            {
-                "steps": 499938,
-                "file_path": "results\\Fighter\\Fighter\\Fighter-499938.onnx",
-                "reward": null,
-                "creation_time": 1649616768.6575453,
-                "auxillary_file_paths": [
-                    "results\\Fighter\\Fighter\\Fighter-499938.pt"
-                ]
-            },
-            {
-                "steps": 500002,
-                "file_path": "results\\Fighter\\Fighter\\Fighter-500002.onnx",
-                "reward": null,
-                "creation_time": 1649616768.814126,
-                "auxillary_file_paths": [
-                    "results\\Fighter\\Fighter\\Fighter-500002.pt"
-                ]
-            },
-            {
-                "steps": 500002,
-                "file_path": "results\\Fighter\\Fighter\\Fighter-500002.onnx",
-                "reward": null,
-                "creation_time": 1649616847.3396027,
-                "auxillary_file_paths": [
-                    "results\\Fighter\\Fighter\\Fighter-500002.pt"
+                    "results\\Fighter\\Fighter\\Fighter-162554.pt"
                 ]
             }
         ],
         "final_checkpoint": {
-            "steps": 500002,
+            "steps": 162554,
             "file_path": "results\\Fighter\\Fighter.onnx",
             "reward": null,
-            "creation_time": 1649616847.3396027,
+            "creation_time": 1650569086.4482057,
             "auxillary_file_paths": [
-                "results\\Fighter\\Fighter\\Fighter-500002.pt"
+                "results\\Fighter\\Fighter\\Fighter-162554.pt"
             ]
-        },
-        "elo": 1177.1471686634998
+        }
     },
     "metadata": {
         "stats_format_version": "0.3.0",

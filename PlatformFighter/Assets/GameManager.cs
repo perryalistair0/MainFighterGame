@@ -23,7 +23,7 @@ public class GameManager : MonoBehaviour
     public FighterAgent agent1;
     public FighterAgent agent2; 
     float EndEpisodeTime;
-    public float Timelimit = 20f; 
+    public float Timelimit = 30f; 
     private void Start()
     {
         EndEpisodeTime = Time.time + Timelimit;
@@ -43,7 +43,13 @@ public class GameManager : MonoBehaviour
 
         Player1Manager.SwitchState(Player1Manager.CharacterMoveState);
         Player2Manager.SwitchState(Player2Manager.CharacterMoveState);
-        
+
+        Player1.GetComponent<Rigidbody>().velocity = Vector3.zero;
+        Player1.GetComponent<Transform>().position = Player1Manager.StartPosition;
+
+        Player2.GetComponent<Rigidbody>().velocity = Vector3.zero;
+        Player2.GetComponent<Transform>().position = Player2Manager.StartPosition;
+
         Player1Health = MaxPlayerHealth;
         Player2Health = MaxPlayerHealth;
     }
@@ -59,8 +65,8 @@ public class GameManager : MonoBehaviour
             healthBar1.transform.localScale = new Vector3((Player1Health / MaxPlayerHealth) * MaxHealthBarWidth, 
                                                            healthBarScale.y,
                                                            healthBarScale.z);
-            agent1.DamageEnemy(Damage);
-            agent2.DamagePlayer(Damage);
+            agent1.DamagePlayer(Damage);
+            agent2.DamageEnemy(Damage);
         }
         else
         {
@@ -70,23 +76,40 @@ public class GameManager : MonoBehaviour
             healthBar2.transform.localScale = new Vector3((Player2Health / MaxPlayerHealth) * MaxHealthBarWidth, 
                                                            healthBarScale.y,
                                                            healthBarScale.z);
-            agent1.DamagePlayer(Damage);
-            agent2.DamageEnemy(Damage);
+           
+            agent1.DamageEnemy(Damage);
+            agent2.DamagePlayer(Damage);
         }
     }
     void Update()
     {
          if(Player1Health < 0 || Player2Health < 0)
         {
-            agent1.GameOver();
-            agent2.GameOver();
+            if(Player2Health < 0)
+            {
+                agent1.PlayerWon();
+                agent2.PlayerLost();
+            }
+            if(Player1Health < 0)
+            {
+                agent2.PlayerWon();
+                agent1.PlayerLost();
+            }
+            Restart();
             EndEpisodeTime = Time.time + Timelimit;
         }
         if(Time.time > EndEpisodeTime)
         {
+            Debug.Log("Game end");
             agent1.GameOver();
             agent2.GameOver();
             EndEpisodeTime = Time.time + Timelimit;
+        }
+        if(Player1.transform.position.x > Player2.transform.position.x)
+        {
+            Vector3 Temp = Player1.transform.position;
+            Player1.transform.position = Player2.transform.position;
+            Player2.transform.position = Temp;
         }
     }
 }

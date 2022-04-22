@@ -26,7 +26,6 @@ public class CharacterDownState : CharacterBaseState
         if(step == 1 || Time.time>EndFallTime)
         {
             character.transform.position = new Vector3(character.transform.position.x, 4, -character.transform.position.z);
-            Debug.Log("Down state");
             character.transform.rotation = Quaternion.Euler(character.startRotation);   
             character.SwitchState(character.CharacterMoveState); 
         }

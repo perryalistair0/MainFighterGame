@@ -7,21 +7,23 @@ public class RandomBehaviour : MonoBehaviour
     CharacterStateManager character;
     float actionInterval = 1f;
     float NextAction;
-    string[] Move_Actions = new string[] {"a", "d", "j", "k"};
-    string[] Crouch_Actions = new string[] {"j", "s"};
+    string[] Move_Actions = new string[] {"a", "s", "d", "j", "k"}; // 
+    string[] Crouch_Actions = new string[] {"j", "s"}; //
     string RandomMove;
     int RandomIndex;
     // Start is called before the first frame update
     void Start()
     {
         character = GetComponent<CharacterStateManager>();
-        NextAction = Time.time + actionInterval;        
+        NextAction = Time.time + actionInterval;       
+        RandomIndex = Random.Range(0, Crouch_Actions.Length);
+        RandomMove = Crouch_Actions[RandomIndex]; 
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        character.currentState.AIinput(character, RandomMove);
         if(Time.time > NextAction)
         {
             if(character.currentEnum == CharacterStateManager.States.CharacterCrouchState)
@@ -29,7 +31,7 @@ public class RandomBehaviour : MonoBehaviour
 
                 RandomIndex = Random.Range(0, Crouch_Actions.Length);
                 RandomMove = Crouch_Actions[RandomIndex];
-                character.currentState.AIinput(character, RandomMove);
+                
             }
             else
             {
@@ -38,7 +40,6 @@ public class RandomBehaviour : MonoBehaviour
                 character.currentState.AIinput(character, RandomMove);
                 NextAction = Time.time + Random.Range(0.1f, actionInterval);
             }
-
         }
     }
 }

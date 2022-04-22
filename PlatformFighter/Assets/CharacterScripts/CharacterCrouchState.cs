@@ -8,7 +8,6 @@ public class CharacterCrouchState : CharacterBaseState
     public string Punch = "j";
     public override void EnterState(CharacterStateManager character)
     {
-        // Debug.Log("Crouched");
         character.currentEnum = CharacterStateManager.States.CharacterCrouchState;
         Crouch = character.Crouch;
         Punch = character.Punch;
@@ -26,7 +25,7 @@ public class CharacterCrouchState : CharacterBaseState
 
     public override void TakeDamage(CharacterStateManager character, int Damage)
     {
-        character.gameManager.TakeDamage(character.IsPlayer1, Damage/5);
+        character.gameManager.TakeDamage(character.IsPlayer1, Damage/2);
         character.SwitchState(character.CharacterCrouchAndBlockState);
     }
 
@@ -36,7 +35,7 @@ public class CharacterCrouchState : CharacterBaseState
         if (Input.GetKeyDown(Punch))
         { 
             character.SwitchState(character.CharcterCrouchPunchState);
-        }   1
+        }   
         if (!Input.GetKey(Crouch))
         {
             character.Leg1.SetActive(true);
@@ -55,7 +54,7 @@ public class CharacterCrouchState : CharacterBaseState
             character.SwitchState(character.CharcterCrouchPunchState);
         }
         // stop crouch 
-        if (input == "s")
+        else if (input != "s")
         {
             character.Leg1.SetActive(true);
             character.Leg2.SetActive(false);

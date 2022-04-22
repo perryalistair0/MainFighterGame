@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Unity.MLAgents;
@@ -54,12 +54,22 @@ public class FighterAgent : Agent
         }
         sensor.AddObservation(Vector3.Distance(transform.position, enemyfighter.transform.position));
         sensor.AddObservation(rb.velocity.x);
+        if(IsPlayer1)
+        {
+            sensor.AddObservation(gameManager.Player1Health);
+            sensor.AddObservation(gameManager.Player2Health);
+        }
+        else
+        {            
+            sensor.AddObservation(gameManager.Player2Health);
+            sensor.AddObservation(gameManager.Player1Health);
+        }        
     }
     public override void OnActionReceived(ActionBuffers actionBuffers)
     {
         int input = actionBuffers.DiscreteActions[0];
-        if(input == 1) { character.currentState.AIinput(character, "a"); }
-        if(input == 2) { character.currentState.AIinput(character, "s"); Debug.Log("Crouched");}
+        if(input == 1) { character.currentState.AIinput(character, "a");}
+        if(input == 2) { character.currentState.AIinput(character, "s");}
         if(input == 3) { character.currentState.AIinput(character, "d"); }
         if(input == 4) { character.currentState.AIinput(character, "j"); }
         if(input == 5) { character.currentState.AIinput(character, "k"); }
@@ -75,39 +85,63 @@ public class FighterAgent : Agent
         }
         */
 
-        float distance = Vector3.Distance(transform.position, enemyfighter.transform.position);
+        //float distance = Vector3.Distance(transform.position, enemyfighter.transform.position);
 //        Debug.Log("Distance; " + distance + " reward, " + (0.1f / distance));
-        if(distance > 3f)
-        {
-            Debug.Log("Too far 0.0");
-            AddReward(-0.0001f);
-        }
+      //  if(distance > 3f)
+       // {
+            // Debug.Log("Too far 0.0");
+            //AddReward(-0.000001f);
+        //}
     }
     public override void Heuristic(in ActionBuffers actionsOut)
     {
         if(IsPlayer1)
         {
             var discreteActionsOut = actionsOut.DiscreteActions;
-            if(Input.GetKeyDown("a"))
+            if(Input.GetKey("a"))
             {
                 discreteActionsOut[0] = 1;
             }
-            if(Input.GetKeyDown("s"))
+            if(Input.GetKey("s"))
             {
                 discreteActionsOut[0] = 2;
             }
-            if(Input.GetKeyDown("d"))
+            if(Input.GetKey("d"))
             {
                 discreteActionsOut[0] = 3;
             }
-            if(Input.GetKeyDown("j"))
+            if(Input.GetKey("j"))
             {
                 discreteActionsOut[0] = 4;
             }
-            if(Input.GetKeyDown("k"))
+            if(Input.GetKey("k"))
             {
                 discreteActionsOut[0] = 5; 
+            }        
+        }
+        if(!IsPlayer1)
+        {
+            var discreteActionsOut = actionsOut.DiscreteActions;
+            if(Input.GetKey("left"))
+            {
+                discreteActionsOut[0] = 1;
             }
+            if(Input.GetKey("down"))
+            {
+                discreteActionsOut[0] = 2;
+            }
+            if(Input.GetKey("right"))
+            {
+                discreteActionsOut[0] = 3;
+            }
+            if(Input.GetKey("x"))
+            {
+                discreteActionsOut[0] = 4;
+            }
+            if(Input.GetKey("c"))
+            {
+                discreteActionsOut[0] = 5; 
+            }        
         }
 
         
@@ -135,6 +169,10 @@ public class FighterAgent : Agent
     }
     public void GameOver()
     {
+        if(IsPlayer1)
+        {
+            Debug.Log("Final: " + GetCumulativeReward());
+        }
         EndEpisode();
     }
 
@@ -142,13 +180,39 @@ public class FighterAgent : Agent
     {
         CurrentFSMInput = input; 
     }
+    
     public void DamageEnemy(float Damage)
     {
-        Debug.Log("Damage: " + Damage/15);
-        AddReward(Damage/15);
+        
+        AddReward(Damage*0.001f);
+        if(IsPlayer1)
+        {
+            Debug.Log("Player 1 Damage: " + Damage*0.0001f + " Player 2 Heatlh :" + gameManager.Player2Health);
+        }
+        else
+        {
+            Debug.Log("Player 2 Damage: " + Damage*0.0001f + " Player 1 Heatlh :" + gameManager.Player1Health);
+        }
     }
     public void DamagePlayer(float Damage)
     {
-        AddReward(-Damage/15);
+        AddReward(-Damage*0.001f);
+    }
+    
+    public void PlayerWon()
+    {
+        AddReward(1);
+        if(IsPlayer1)
+        {
+            Debug.Log("Score: " + GetCumulativeReward());
+        }
+    }
+    public void PlayerLost()
+    {
+        AddReward(-1);
+    }
+    public float GetReward()
+    {
+        return GetCumulativeReward();
     }
 }

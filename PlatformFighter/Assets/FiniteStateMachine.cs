@@ -29,7 +29,7 @@ public class FiniteStateMachine : MonoBehaviour
                     if((character.IsPlayer1 && rb.velocity.x < 5)||
                       (!character.IsPlayer1 && rb.velocity.x > -5))
                     {
-                        agent.FSMInput("d");
+                        character.currentState.AIinput(character, "d");
                     }
             }
             // attack
@@ -37,12 +37,12 @@ public class FiniteStateMachine : MonoBehaviour
             {
                 if(Enemy.currentEnum == CharacterStateManager.States.CharacterCrouchState)
                 {
-                    agent.FSMInput("s");
+                    character.currentState.AIinput(character,"s");
                 }
                 else
                 {
-                    if(Random.value > 0.1){agent.FSMInput("j");}
-                    else{agent.FSMInput("k");}
+                    if(Random.value > 0.1){character.currentState.AIinput(character,"j");}
+                    else{character.currentState.AIinput(character,"k");}
                 }
             }
         }
@@ -50,11 +50,11 @@ public class FiniteStateMachine : MonoBehaviour
         {
             if(Enemy.currentEnum == CharacterStateManager.States.CharacterCrouchState)
             {
-                agent.FSMInput("j");
+                character.currentState.AIinput(character,"j");
             }
             else
             {
-                agent.FSMInput("s");
+                character.currentState.AIinput(character,"s");
             }
         }
     }

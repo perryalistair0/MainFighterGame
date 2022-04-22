@@ -62,6 +62,7 @@ public class CharacterStateManager : MonoBehaviour
     void Awake()
     {
         
+        StartPosition = transform.position;
         startRotation = transform.localRotation.eulerAngles;
     }
 
@@ -75,7 +76,6 @@ public class CharacterStateManager : MonoBehaviour
         currentState = CharacterMoveState;
         
         currentState.EnterState(this);      
-        StartPosition = transform.position;
     }
 
     // Update is called once per frame
@@ -115,6 +115,7 @@ public class CharacterStateManager : MonoBehaviour
         // Resetting everything 
         Arm1.SetActive(true);
         Arm2.SetActive(false);
+        Arm3.SetActive(false);
         Arm1.transform.localPosition = new Vector3(0, -0.3f, -0.8f);
         Arm1.transform.localRotation = Quaternion.Euler(0, 0, 0);
         // Debug.Log("Start rotation 2 " + startRotation);

@@ -120,7 +120,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4805975149872657139}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
@@ -216,8 +216,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 3.102974, y: 1.339243, z: 3.1105137}
-  m_Center: {x: -0.20680885, y: -0.16962661, z: 0.7778372}
+  m_Size: {x: 3.102974, y: 1.0999508, z: 3.185758}
+  m_Center: {x: -0.20680885, y: -0.049980745, z: 0.8154597}
 --- !u!1 &4805975149938570333
 GameObject:
   m_ObjectHideFlags: 0
@@ -955,9 +955,10 @@ MonoBehaviour:
   Crouch: s
   Punch: j
   Kick: k
+  StartPosition: {x: 0, y: 0, z: 0}
   gameManager: {fileID: 0}
   IsPlayer1: 0
-  startRotation: {x: 0, y: 0, z: 0, w: 0}
+  startRotation: {x: 0, y: 0, z: 0}
 --- !u!75 &4811508816863254134
 ConstantForce:
   m_ObjectHideFlags: 0

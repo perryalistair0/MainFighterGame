@@ -10,7 +10,7 @@ public class CharacterLegsweepState : CharacterBaseState
     public Vector3 StartRotation = Vector3.zero; 
     public override void EnterState(CharacterStateManager character)
     {
-        // Debug.Log("Enter leg sweep");
+        //Debug.Log("Enter leg sweep");
         character.currentEnum = CharacterStateManager.States.CharacterLegSweepState;
         // Debug.Log("Current enum" + character.currentEnum);
         AppliedDamage = false;
@@ -40,8 +40,21 @@ public class CharacterLegsweepState : CharacterBaseState
 
     public override void TakeDamage(CharacterStateManager character, int Damage)
     {
-        character.SingleLeg.transform.localPosition = new Vector3(-1.153821f, -2.46f, -1.504989f);
-        character.SingleLeg.transform.rotation = Quaternion.Euler(0f, 25f, 0f);
+        
+        if(Step == 2)
+        {
+            character.SingleLeg.transform.localPosition = new Vector3(-1.153821f, -2.46f, -1.504989f);
+            character.SingleLeg.transform.rotation = Quaternion.Euler(0f, 25f, 0f);
+            character.transform.rotation = Quaternion.Euler(StartRotation);
+            character.gameManager.TakeDamage(character.IsPlayer1, Damage); 
+
+            character.ShowEyebrows(false);
+            character.SwitchState(character.CharacterMoveState);
+        }
+        else if(Damage == 15)
+        {
+            character.gameManager.TakeDamage(character.IsPlayer1, Damage); 
+        }
     }
 
     public override void UpdateState(CharacterStateManager character)

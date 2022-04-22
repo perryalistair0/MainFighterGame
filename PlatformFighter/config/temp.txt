@@ -1,0 +1,9 @@
+ gail:
+        strength: 0.5
+        demo_path: Assets/Demonstrations/FinalDemo.demo
+    behavioral_cloning: 
+      strength: 0.5
+      demo_path: Assets/Demonstrations/FinalDemo.demo
+      max_steps: 5000000
+      time_horizon: 64
+      summary_freq: 20000

@@ -14,6 +14,10 @@ public class CharacterCrouchPunchState : CharacterBaseState
     {
         character.currentEnum = CharacterStateManager.States.CharcterCrouchPunchState;
         AppliedDamage = false; 
+        
+        character.Leg1.SetActive(false);
+        character.Leg2.SetActive(true);
+        character.transform.position = new Vector3(character.transform.position.x, 2.1f, character.transform.position.z);
 
         step = 0;
         Arm = character.GetTransform().Find("Arm1");
@@ -41,7 +45,7 @@ public class CharacterCrouchPunchState : CharacterBaseState
     public override void UpdateState(CharacterStateManager character)
     {
         character.transform.position = new Vector3(character.transform.position.x, 2.5f, character.transform.position.z);
-   
+      
         if (step == 0)
         {
             character.transform.rotation = Quaternion.Slerp(character.transform.rotation,
