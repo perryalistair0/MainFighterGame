@@ -118,6 +118,7 @@ public class CharacterStateManager : MonoBehaviour
         Arm3.SetActive(false);
         Arm1.transform.localPosition = new Vector3(0, -0.3f, -0.8f);
         Arm1.transform.localRotation = Quaternion.Euler(0, 0, 0);
+        Arm1.transform.localScale = new Vector3(0.5f, 2.6f, 0.5f);
         // Debug.Log("Start rotation 2 " + startRotation);
         transform.localRotation = Quaternion.Euler(startRotation);
         Leg1.SetActive(true);

@@ -8,16 +8,17 @@ public class RandomBehaviour : MonoBehaviour
     float actionInterval = 1f;
     float NextAction;
     string[] Move_Actions = new string[] {"a", "s", "d", "j", "k"}; // 
-    string[] Crouch_Actions = new string[] {"j", "s"}; //
+    string[] Crouch_Actions = new string[] {"s", "j"}; //, 
     string RandomMove;
     int RandomIndex;
     // Start is called before the first frame update
     void Start()
     {
+       
         character = GetComponent<CharacterStateManager>();
         NextAction = Time.time + actionInterval;       
-        RandomIndex = Random.Range(0, Crouch_Actions.Length);
-        RandomMove = Crouch_Actions[RandomIndex]; 
+        RandomIndex = Random.Range(0, Move_Actions.Length);
+        RandomMove = Move_Actions[RandomIndex]; 
     }
 
     // Update is called once per frame

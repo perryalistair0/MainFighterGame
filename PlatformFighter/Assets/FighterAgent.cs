@@ -7,6 +7,8 @@ using Unity.MLAgents.Actuators;
 
 public class FighterAgent : Agent
 {
+    public bool isFSM = false;
+    public FiniteStateMachine FSM_Model;
     string CurrentFSMInput = "";
     public CharacterStateManager enemyfighter;
     GameManager gameManager;
@@ -17,6 +19,7 @@ public class FighterAgent : Agent
     // Start is called before the first frame update
     void Start()
     {  
+        FSM_Model = GetComponent<FiniteStateMachine>();
         rb = GetComponent<Rigidbody>();
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         character = GetComponent<CharacterStateManager>();
@@ -42,6 +45,7 @@ public class FighterAgent : Agent
     }
     public override void CollectObservations(VectorSensor sensor)
     {
+        
         // Obeserve internal state
         for (int ci = 0; ci < (int)CharacterStateManager.States.CharacterLastState; ci++)
         {
@@ -63,7 +67,9 @@ public class FighterAgent : Agent
         {            
             sensor.AddObservation(gameManager.Player2Health);
             sensor.AddObservation(gameManager.Player1Health);
-        }        
+        }       
+        
+
     }
     public override void OnActionReceived(ActionBuffers actionBuffers)
     {
@@ -72,7 +78,7 @@ public class FighterAgent : Agent
         if(input == 2) { character.currentState.AIinput(character, "s");}
         if(input == 3) { character.currentState.AIinput(character, "d"); }
         if(input == 4) { character.currentState.AIinput(character, "j"); }
-        if(input == 5) { character.currentState.AIinput(character, "k"); }
+        if(input == 5) { character.currentState.AIinput(character, "k"); Debug.Log("AI Kick");}
         /*
         if(IsPlayer1 && GetComponent<Rigidbody>().velocity.x == 10)
         {
@@ -95,53 +101,60 @@ public class FighterAgent : Agent
     }
     public override void Heuristic(in ActionBuffers actionsOut)
     {
-        if(IsPlayer1)
+        if(isFSM)
         {
             var discreteActionsOut = actionsOut.DiscreteActions;
-            if(Input.GetKey("a"))
-            {
-                discreteActionsOut[0] = 1;
-            }
-            if(Input.GetKey("s"))
-            {
-                discreteActionsOut[0] = 2;
-            }
-            if(Input.GetKey("d"))
-            {
-                discreteActionsOut[0] = 3;
-            }
-            if(Input.GetKey("j"))
-            {
-                discreteActionsOut[0] = 4;
-            }
-            if(Input.GetKey("k"))
-            {
-                discreteActionsOut[0] = 5; 
-            }        
+            discreteActionsOut[0] = FSM_Model.FSMmove();
         }
-        if(!IsPlayer1)
-        {
-            var discreteActionsOut = actionsOut.DiscreteActions;
-            if(Input.GetKey("left"))
+        else{
+            if(IsPlayer1)
             {
-                discreteActionsOut[0] = 1;
+                var discreteActionsOut = actionsOut.DiscreteActions;
+                if(Input.GetKey("a"))
+                {
+                    discreteActionsOut[0] = 1;
+                }
+                if(Input.GetKey("s"))
+                {
+                    discreteActionsOut[0] = 2;
+                }
+                if(Input.GetKey("d"))
+                {
+                    discreteActionsOut[0] = 3;
+                }
+                if(Input.GetKey("j"))
+                {
+                    discreteActionsOut[0] = 4;
+                }
+                if(Input.GetKey("k"))
+                {
+                    discreteActionsOut[0] = 5; 
+                }        
             }
-            if(Input.GetKey("down"))
+            if(!IsPlayer1)
             {
-                discreteActionsOut[0] = 2;
+                var discreteActionsOut = actionsOut.DiscreteActions;
+                if(Input.GetKey("left"))
+                {
+                    discreteActionsOut[0] = 1;
+                }
+                if(Input.GetKey("down"))
+                {
+                    discreteActionsOut[0] = 2;
+                }
+                if(Input.GetKey("right"))
+                {
+                    discreteActionsOut[0] = 3;
+                }
+                if(Input.GetKey("x"))
+                {
+                    discreteActionsOut[0] = 4;
+                }
+                if(Input.GetKey("c"))
+                {
+                    discreteActionsOut[0] = 5; 
+                }        
             }
-            if(Input.GetKey("right"))
-            {
-                discreteActionsOut[0] = 3;
-            }
-            if(Input.GetKey("x"))
-            {
-                discreteActionsOut[0] = 4;
-            }
-            if(Input.GetKey("c"))
-            {
-                discreteActionsOut[0] = 5; 
-            }        
         }
 
         
@@ -185,14 +198,6 @@ public class FighterAgent : Agent
     {
         
         AddReward(Damage*0.001f);
-        if(IsPlayer1)
-        {
-            Debug.Log("Player 1 Damage: " + Damage*0.0001f + " Player 2 Heatlh :" + gameManager.Player2Health);
-        }
-        else
-        {
-            Debug.Log("Player 2 Damage: " + Damage*0.0001f + " Player 1 Heatlh :" + gameManager.Player1Health);
-        }
     }
     public void DamagePlayer(float Damage)
     {

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CharacterDownState : CharacterBaseState
 {
-    public float FallSpeed = 2f; 
+    public float FallSpeed = 10f; 
     private int step = 0;
 
     public float EndFallTime; 

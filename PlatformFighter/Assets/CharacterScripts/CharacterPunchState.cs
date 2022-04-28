@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CharacterPunchState : CharacterBaseState
 {
-    public float PunchSpeed = 20f; 
+    public float PunchSpeed = 13f; 
     private Transform Arm;
     private int step = 0;
 
@@ -62,7 +62,7 @@ public class CharacterPunchState : CharacterBaseState
             character.Arm1.transform.localRotation = Quaternion.Euler(0, 0, 90);
 
 
-            if (Quaternion.Angle(character.transform.rotation, Quaternion.Euler(StartRotation)) < 1) { step++; }
+            if (Quaternion.Angle(character.transform.rotation, Quaternion.Euler(StartRotation)) < 10) { step++; }
         }
         // Return to neutral
         else if(step == 2)

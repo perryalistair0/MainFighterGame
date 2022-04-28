@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CharacterCrouchPunchState : CharacterBaseState
 {
-    public float PunchSpeed = 30f;
+    public float PunchSpeed = 15f;
     private Transform Arm;
     private int step = 0;
     bool AppliedDamage;
@@ -57,6 +57,7 @@ public class CharacterCrouchPunchState : CharacterBaseState
         }
         else if (step == 1)
         {
+            character.Arm1.transform.localScale = new Vector3(0.5f, 1.2f, 0.5f);
             character.transform.rotation = Quaternion.Slerp(character.transform.rotation,
                                                             Quaternion.Euler(StartRotation), Time.deltaTime * PunchSpeed);
             character.Arm1.SetActive(true); 
@@ -65,7 +66,7 @@ public class CharacterCrouchPunchState : CharacterBaseState
             character.Arm1.transform.localRotation = Quaternion.Euler(0, 0, 90);
 
 
-            if (Quaternion.Angle(character.transform.rotation, Quaternion.Euler(StartRotation)) < 1) { step++; }
+            if (Quaternion.Angle(character.transform.rotation, Quaternion.Euler(StartRotation)) < 10) { step++; }
         }
         else if (step == 2)
         {
@@ -73,6 +74,7 @@ public class CharacterCrouchPunchState : CharacterBaseState
             character.Arm1.transform.localRotation = Quaternion.Euler(0, 0, 0);
 
             character.ShowEyebrows(false);
+            character.Arm1.transform.localScale = new Vector3(0.5f, 2.6f, 0.5f);
             character.SwitchState(character.CharacterCrouchState);
 
         }

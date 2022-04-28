@@ -25,7 +25,14 @@ public class CharacterCrouchState : CharacterBaseState
 
     public override void TakeDamage(CharacterStateManager character, int Damage)
     {
-        character.gameManager.TakeDamage(character.IsPlayer1, Damage/2);
+        if(Damage == 15)
+        {
+            character.gameManager.TakeDamage(character.IsPlayer1, Damage/5);
+        }
+        else
+        {
+            character.gameManager.TakeDamage(character.IsPlayer1, Damage/2);
+        }
         character.SwitchState(character.CharacterCrouchAndBlockState);
     }
 

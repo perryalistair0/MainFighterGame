@@ -8,6 +8,19 @@ public class FiniteStateMachine : MonoBehaviour
     CharacterStateManager character;
     public CharacterStateManager Enemy;
     FighterAgent agent;
+    public enum states
+    {
+        Aggressive,
+        PassiveAggressive,
+        Passive,
+        Approach
+    }
+    private states CurrentEnumState;
+
+    private float NextSwitch;
+    private float Interval1 = 5f; 
+    private float Interval2 = 10f; 
+    float distance = 10f;
 
     // Start is called before the first frame update
     void Start()
@@ -15,47 +28,142 @@ public class FiniteStateMachine : MonoBehaviour
         character = GetComponent<CharacterStateManager>();
         rb = GetComponent<Rigidbody>();
         agent = GetComponent<FighterAgent>();
+
+        NextSwitch = Time.time + Random.Range(Interval1, Interval2);
+        Debug.Log(Random.Range(Interval1, Interval2));
     }
 
     // Update is called once per frame
+    // 1: A
+    // 2: S
+    // 3: D
+    // 4: J
+    // 5: K
     void Update()
+    {
+        distance = Vector3.Distance(character.transform.position, Enemy.transform.position);
+        
+        if(Time.time > NextSwitch)
+        {
+            Debug.Log("Switch");
+            if(distance > 4)
+            {
+                CurrentEnumState = states.Approach;
+            }
+            else
+            {               
+                CurrentEnumState = (states)Random.Range(0, 2);
+             //    Debug.Log(CurrentEnumState); 
+            }
+            NextSwitch = Time.time + Random.Range(Interval1, Interval2);
+        }        
+    }
+    public int FSMmove()
+    {
+        
+        switch (CurrentEnumState)
+        {
+            case states.Aggressive:
+                return AggressiveUpdate();
+            case states.PassiveAggressive:
+                return PassiveAggressiveUpdate();
+        }
+        return AggressiveUpdate(); 
+    }
+    int Approach()
+    {
+        return 3;
+    }
+    int AggressiveUpdate()
     {
         if(character.currentEnum == CharacterStateManager.States.CharacterMoveState)
         {
-            // move closer
-            float Distance = Mathf.Abs(transform.position.x - Enemy.transform.position.x);
-            if(Distance > 2.5f) 
-            { 
-                    if((character.IsPlayer1 && rb.velocity.x < 5)||
-                      (!character.IsPlayer1 && rb.velocity.x > -5))
-                    {
-                        character.currentState.AIinput(character, "d");
-                    }
-            }
-            // attack
-            else
+            // crouch to block leg sweep
+            if(Enemy.currentEnum == CharacterStateManager.States.CharacterLegSweepState)
             {
-                if(Enemy.currentEnum == CharacterStateManager.States.CharacterCrouchState)
-                {
-                    character.currentState.AIinput(character,"s");
-                }
-                else
-                {
-                    if(Random.value > 0.1){character.currentState.AIinput(character,"j");}
-                    else{character.currentState.AIinput(character,"k");}
-                }
+                return 2; 
+            }
+            // approach if to far away
+            else if(distance > 2.5)
+            {
+                return 3; 
+            }
+            // if in range punch
+            else return 4; 
+        }
+        else if(character.currentEnum == CharacterStateManager.States.CharacterCrouchState)
+        {
+            // crouch to block leg sweep
+            if(Enemy.currentEnum == CharacterStateManager.States.CharacterLegSweepState)
+            {
+                return 2; 
+            }
+            // Stand up
+            else 
+            {
+                return 3;
             }
         }
-        if(character.currentEnum == CharacterStateManager.States.CharacterCrouchState)
+        else
         {
-            if(Enemy.currentEnum == CharacterStateManager.States.CharacterCrouchState)
+            // Punch by default
+            return 4; 
+        }
+    }
+    int PassiveAggressiveUpdate()
+    {
+        if(character.currentEnum == CharacterStateManager.States.CharacterMoveState)
+        {
+            // if in perfect range, kick
+            if((distance < 3.5f) && (distance > 3.2f))
             {
-                character.currentState.AIinput(character,"j");
+                return 5;
             }
-            else
+            // Move toward if too far
+            if(distance > 3.5f)
             {
-                character.currentState.AIinput(character,"s");
+                return 3;
             }
+            // if too close punch for space
+            if(distance < 2f)
+            {
+                return 4; 
+            }
+            // if just too close
+            if(distance < 3f)
+            {
+                return 1;
+            }
+        }
+        // kick by default
+        return 5;
+    }
+    int PassiveUpdate()
+    {
+        float distanceX = Mathf.Abs(Enemy.transform.position.x - character.transform.position.x);
+        if(distanceX > 3.5f)
+        {
+            return 3; 
+        }
+        if(Enemy.currentEnum == CharacterStateManager.States.CharacterPunchState)
+        {
+            return 1; 
+        }
+        if(Enemy.currentEnum == CharacterStateManager.States.CharacterLegSweepState)
+        {
+            return 2; 
+        }
+        if(distanceX > 1.5f)
+        {
+            return 3;
+        }
+        else
+        {
+            if(character.currentEnum == CharacterStateManager.States.CharacterMoveState)
+            {
+                return 2; 
+            }
+            return 4;     
         }
     }
 }

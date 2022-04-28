@@ -1,0 +1,30 @@
+{
+    "Camera": {
+        "elo": 1200.0,
+        "checkpoints": [
+            {
+                "steps": 31185,
+                "file_path": "results\\Camera\\Camera\\Camera-31185.onnx",
+                "reward": null,
+                "creation_time": 1651132218.3695204,
+                "auxillary_file_paths": [
+                    "results\\Camera\\Camera\\Camera-31185.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 31185,
+            "file_path": "results\\Camera\\Camera.onnx",
+            "reward": null,
+            "creation_time": 1651132218.3695204,
+            "auxillary_file_paths": [
+                "results\\Camera\\Camera\\Camera-31185.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.29.0",
+        "torch_version": "1.7.0+cu110"
+    }
+}

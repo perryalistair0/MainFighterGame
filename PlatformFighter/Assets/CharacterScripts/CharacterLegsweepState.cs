@@ -4,13 +4,12 @@ using UnityEngine;
 
 public class CharacterLegsweepState : CharacterBaseState
 {
-    public float TurnSpeed = 7f;
+    public float TurnSpeed = 6f;
     public int Step = 0;
     bool AppliedDamage = false;
     public Vector3 StartRotation = Vector3.zero; 
     public override void EnterState(CharacterStateManager character)
     {
-        //Debug.Log("Enter leg sweep");
         character.currentEnum = CharacterStateManager.States.CharacterLegSweepState;
         // Debug.Log("Current enum" + character.currentEnum);
         AppliedDamage = false;
@@ -68,12 +67,14 @@ public class CharacterLegsweepState : CharacterBaseState
         if(Step == 1)
         {
 
-            character.SingleLeg.transform.localPosition = new Vector3(-0.68f, -1.66f, -1.5f);
-            character.SingleLeg.transform.localRotation = Quaternion.Euler(-11.169f, 21.959f, 35.677f);
+            //character.SingleLeg.transform.localPosition = new Vector3(-0.68f, -1.66f, -1.5f);
+            //character.SingleLeg.transform.localRotation = Quaternion.Euler(-11.169f, 21.959f, 35.677f);
+            character.SingleLeg.transform.localPosition = new Vector3(-0.1f, -1.4f, -2.1f);
+            character.SingleLeg.transform.localRotation = Quaternion.Euler(1.16f, 38f, 81f);
 
             character.transform.rotation = Quaternion.Slerp(character.transform.rotation,
                                                            Quaternion.Euler(0, StartRotation.y -45, 0), Time.deltaTime * TurnSpeed);
-            if (Quaternion.Angle(character.transform.rotation, Quaternion.Euler(0, StartRotation.y-45, 0)) < 1) { Step++; }
+            if (Quaternion.Angle(character.transform.rotation, Quaternion.Euler(0, StartRotation.y-45, 0)) < 10) { Step++; }
         }
         if(Step == 2)
         {
@@ -82,7 +83,7 @@ public class CharacterLegsweepState : CharacterBaseState
 
             character.transform.rotation = Quaternion.Slerp(character.transform.rotation,
                                                            Quaternion.Euler(StartRotation), Time.deltaTime * TurnSpeed);
-            if (Quaternion.Angle(character.transform.rotation, Quaternion.Euler(StartRotation)) < 1)
+            if (Quaternion.Angle(character.transform.rotation, Quaternion.Euler(StartRotation)) < 1    )
             {
                 character.ShowEyebrows(false);
                 character.SwitchState(character.CharacterMoveState);
