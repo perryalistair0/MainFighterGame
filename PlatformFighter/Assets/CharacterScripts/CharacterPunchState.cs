@@ -77,7 +77,7 @@ public class CharacterPunchState : CharacterBaseState
 
     public override void TakeDamage(CharacterStateManager character, int Damgae)
     {
-        if(step == 0)
+        if(step != 1)
         {
             character.Arm2.SetActive(false);
             character.Arm1.SetActive(true);

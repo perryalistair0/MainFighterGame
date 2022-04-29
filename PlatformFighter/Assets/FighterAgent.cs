@@ -78,7 +78,7 @@ public class FighterAgent : Agent
         if(input == 2) { character.currentState.AIinput(character, "s");}
         if(input == 3) { character.currentState.AIinput(character, "d"); }
         if(input == 4) { character.currentState.AIinput(character, "j"); }
-        if(input == 5) { character.currentState.AIinput(character, "k"); Debug.Log("AI Kick");}
+        if(input == 5) { character.currentState.AIinput(character, "k"); }
         /*
         if(IsPlayer1 && GetComponent<Rigidbody>().velocity.x == 10)
         {

@@ -30,7 +30,17 @@ public class CharacterStateManager : MonoBehaviour
         CharacterDownState,
         CharacterLastState
     }
+    
     public States currentEnum;
+    public enum MoveState
+    {
+        neutral, 
+        Charge,
+        Attack, 
+        Cooldown
+    }
+    
+    public MoveState currentMove = MoveState.neutral; 
     // Components 
     private Rigidbody rb;
 

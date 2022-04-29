@@ -48,6 +48,7 @@ public class CharacterCrouchPunchState : CharacterBaseState
       
         if (step == 0)
         {
+            character.currentMove = CharacterStateManager.MoveState.Charge;
             character.transform.rotation = Quaternion.Slerp(character.transform.rotation,
                                                             Quaternion.Euler(0, StartRotation.y + 45, 0), Time.deltaTime * PunchSpeed);
             character.Arm1.SetActive(false);
@@ -55,8 +56,9 @@ public class CharacterCrouchPunchState : CharacterBaseState
 
             if (Quaternion.Angle(character.transform.rotation, Quaternion.Euler(0, StartRotation.y + 45, 0)) < 1) { step++; }
         }
-        else if (step == 1)
+        else if (step != 1)
         {
+            character.currentMove = CharacterStateManager.MoveState.Attack;
             character.Arm1.transform.localScale = new Vector3(0.5f, 1.2f, 0.5f);
             character.transform.rotation = Quaternion.Slerp(character.transform.rotation,
                                                             Quaternion.Euler(StartRotation), Time.deltaTime * PunchSpeed);
@@ -70,6 +72,7 @@ public class CharacterCrouchPunchState : CharacterBaseState
         }
         else if (step == 2)
         {
+            character.currentMove = CharacterStateManager.MoveState.Cooldown;
             character.Arm1.transform.localPosition = new Vector3(0, -0.3f, -0.8f);
             character.Arm1.transform.localRotation = Quaternion.Euler(0, 0, 0);
 

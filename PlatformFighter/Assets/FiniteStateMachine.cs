@@ -60,14 +60,14 @@ public class FiniteStateMachine : MonoBehaviour
     }
     public int FSMmove()
     {
-        
+     /*   
         switch (CurrentEnumState)
         {
             case states.Aggressive:
                 return AggressiveUpdate();
             case states.PassiveAggressive:
                 return PassiveAggressiveUpdate();
-        }
+        }*/
         return AggressiveUpdate(); 
     }
     int Approach()
@@ -81,7 +81,37 @@ public class FiniteStateMachine : MonoBehaviour
             // crouch to block leg sweep
             if(Enemy.currentEnum == CharacterStateManager.States.CharacterLegSweepState)
             {
-                return 2; 
+                Debug.Log(Enemy.transform.rotation.eulerAngles);
+                if(Enemy.currentMove == CharacterStateManager.MoveState.Charge)
+                {
+                    if(Enemy.transform.rotation.eulerAngles.y < 35)
+                    {
+                        return 4; 
+                    }
+                    else
+                    {
+                        return 3; 
+                    }
+                     
+                }
+                if(Enemy.currentMove == CharacterStateManager.MoveState.Attack)
+                {
+                    return 2;
+                }
+                if(Enemy.currentMove == CharacterStateManager.MoveState.Cooldown)
+                {
+                    Debug.Log("punch counter");
+                    if((character.currentEnum == CharacterStateManager.States.CharacterCrouchAndBlockState)
+                    || (character.currentEnum == CharacterStateManager.States.CharacterCrouchState))
+                    {
+                        return 3; 
+                    }
+                    else
+                    {
+                        return 4; 
+                    }
+                } 
+                return 3; 
             }
             // approach if to far away
             else if(distance > 2.5)
