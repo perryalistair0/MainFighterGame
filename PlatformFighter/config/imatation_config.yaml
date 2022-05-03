@@ -22,11 +22,11 @@ behaviors:
         strength: 1.0
         gamma: 0.99
       gail:
-        strength: 0.2
-        demo_path: Assets/Demonstrations/CameraTest.demo
+        strength: 0
+        demo_path: Assets/Demonstrations/FSMDemo.demo
     behavioral_cloning: 
-      strength: 0.2
-      demo_path: Assets/Demonstrations/CameraTest.demo
+      strength: 0
+      demo_path: Assets/Demonstrations/FSMDemo.demo
       max_steps: 5000000
       time_horizon: 64
       summary_freq: 20000

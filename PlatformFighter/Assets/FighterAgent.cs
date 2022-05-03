@@ -47,6 +47,7 @@ public class FighterAgent : Agent
     {
         
         // Obeserve internal state
+        
         for (int ci = 0; ci < (int)CharacterStateManager.States.CharacterLastState; ci++)
         {
             sensor.AddObservation((int)character.currentEnum == ci ? 1.0f : 0.0f);
@@ -56,8 +57,18 @@ public class FighterAgent : Agent
         {
             sensor.AddObservation((int)enemyfighter.currentEnum == ci ? 1.0f : 0.0f);
         }
-        sensor.AddObservation(Vector3.Distance(transform.position, enemyfighter.transform.position));
-        sensor.AddObservation(rb.velocity.x);
+        // observe current move state
+        for (int ci = 0; ci < (int)CharacterStateManager.MoveState.LastState; ci++)
+        {
+            sensor.AddObservation((int)enemyfighter.currentMove == ci ? 1.0f : 0.0f);
+        }
+        // See what stage they're at
+        sensor.AddObservation(enemyfighter.transform.rotation.eulerAngles.y);
+
+        // Distance to other fighter
+        sensor.AddObservation(transform.position);
+        sensor.AddObservation(enemyfighter.transform.position);
+
         if(IsPlayer1)
         {
             sensor.AddObservation(gameManager.Player1Health);
@@ -68,8 +79,6 @@ public class FighterAgent : Agent
             sensor.AddObservation(gameManager.Player2Health);
             sensor.AddObservation(gameManager.Player1Health);
         }       
-        
-
     }
     public override void OnActionReceived(ActionBuffers actionBuffers)
     {
@@ -215,6 +224,11 @@ public class FighterAgent : Agent
     public void PlayerLost()
     {
         AddReward(-1);
+        
+        if(IsPlayer1)
+        {
+            Debug.Log("Score: " + GetCumulativeReward());
+        }
     }
     public float GetReward()
     {

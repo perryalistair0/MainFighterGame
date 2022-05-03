@@ -225,6 +225,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51ca98d4c1ba3c74e8285f2fc293d117, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &389031584 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 943128879723083323, guid: 2a031e186329dca44b7607789ba60713,
+    type: 3}
+  m_PrefabInstance: {fileID: 1248178298}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2d3cca1d8ce6fd4ea572551b161d8d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -425,7 +437,7 @@ PrefabInstance:
     - target: {fileID: 943128879667798714, guid: 2a031e186329dca44b7607789ba60713,
         type: 3}
       propertyPath: m_BehaviorType
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 943128879667798714, guid: 2a031e186329dca44b7607789ba60713,
         type: 3}
@@ -435,7 +447,7 @@ PrefabInstance:
     - target: {fileID: 943128879667798714, guid: 2a031e186329dca44b7607789ba60713,
         type: 3}
       propertyPath: m_BrainParameters.VectorObservationSize
-      value: 20
+      value: 29
       objectReference: {fileID: 0}
     - target: {fileID: 943128879667798717, guid: 2a031e186329dca44b7607789ba60713,
         type: 3}
@@ -459,23 +471,28 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 943128879723083312, guid: 2a031e186329dca44b7607789ba60713,
         type: 3}
+      propertyPath: FSM_Model
+      value: 
+      objectReference: {fileID: 389031584}
+    - target: {fileID: 943128879723083312, guid: 2a031e186329dca44b7607789ba60713,
+        type: 3}
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 943128879723083320, guid: 2a031e186329dca44b7607789ba60713,
         type: 3}
       propertyPath: Record
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 943128879723083320, guid: 2a031e186329dca44b7607789ba60713,
         type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 943128879723083320, guid: 2a031e186329dca44b7607789ba60713,
         type: 3}
       propertyPath: DemonstrationName
-      value: CameraTest
+      value: FSMDemo
       objectReference: {fileID: 0}
     - target: {fileID: 943128879723083322, guid: 2a031e186329dca44b7607789ba60713,
         type: 3}
@@ -491,21 +508,22 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Model
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 5022602860645237092, guid: f1f584776cdf67c4f8c63a4bca7b793f,
+        type: 3}
     - target: {fileID: 943128879723083325, guid: 2a031e186329dca44b7607789ba60713,
         type: 3}
       propertyPath: m_BehaviorName
-      value: Fighter
+      value: FSM
       objectReference: {fileID: 0}
     - target: {fileID: 943128879723083325, guid: 2a031e186329dca44b7607789ba60713,
         type: 3}
       propertyPath: m_BehaviorType
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 943128879723083325, guid: 2a031e186329dca44b7607789ba60713,
         type: 3}
       propertyPath: m_BrainParameters.VectorObservationSize
-      value: 20
+      value: 29
       objectReference: {fileID: 0}
     - target: {fileID: 943128880445654023, guid: 2a031e186329dca44b7607789ba60713,
         type: 3}
@@ -676,7 +694,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1784328915}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b2d3cca1d8ce6fd4ea572551b161d8d1, type: 3}
   m_Name: 

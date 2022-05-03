@@ -37,7 +37,8 @@ public class CharacterStateManager : MonoBehaviour
         neutral, 
         Charge,
         Attack, 
-        Cooldown
+        Cooldown,
+        LastState
     }
     
     public MoveState currentMove = MoveState.neutral; 

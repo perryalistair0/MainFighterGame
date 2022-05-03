@@ -18,8 +18,8 @@ public class FiniteStateMachine : MonoBehaviour
     private states CurrentEnumState;
 
     private float NextSwitch;
-    private float Interval1 = 5f; 
-    private float Interval2 = 10f; 
+    private float Interval1 = 1f; 
+    private float Interval2 = 3f; 
     float distance = 10f;
 
     // Start is called before the first frame update
@@ -30,7 +30,6 @@ public class FiniteStateMachine : MonoBehaviour
         agent = GetComponent<FighterAgent>();
 
         NextSwitch = Time.time + Random.Range(Interval1, Interval2);
-        Debug.Log(Random.Range(Interval1, Interval2));
     }
 
     // Update is called once per frame
@@ -45,30 +44,35 @@ public class FiniteStateMachine : MonoBehaviour
         
         if(Time.time > NextSwitch)
         {
-            Debug.Log("Switch");
             if(distance > 4)
             {
                 CurrentEnumState = states.Approach;
             }
             else
-            {               
-                CurrentEnumState = (states)Random.Range(0, 2);
-             //    Debug.Log(CurrentEnumState); 
+            {   
+                if(Random.value > 0.5)
+                {
+                    CurrentEnumState = states.Aggressive;
+                }            
+                else
+                {
+                    CurrentEnumState = states.PassiveAggressive;
+                }
             }
             NextSwitch = Time.time + Random.Range(Interval1, Interval2);
         }        
     }
     public int FSMmove()
-    {
-     /*   
+    {   
         switch (CurrentEnumState)
         {
             case states.Aggressive:
                 return AggressiveUpdate();
             case states.PassiveAggressive:
                 return PassiveAggressiveUpdate();
-        }*/
-        return AggressiveUpdate(); 
+        }
+
+        return AggressiveUpdate();
     }
     int Approach()
     {
@@ -81,7 +85,6 @@ public class FiniteStateMachine : MonoBehaviour
             // crouch to block leg sweep
             if(Enemy.currentEnum == CharacterStateManager.States.CharacterLegSweepState)
             {
-                Debug.Log(Enemy.transform.rotation.eulerAngles);
                 if(Enemy.currentMove == CharacterStateManager.MoveState.Charge)
                 {
                     if(Enemy.transform.rotation.eulerAngles.y < 35)
@@ -94,13 +97,12 @@ public class FiniteStateMachine : MonoBehaviour
                     }
                      
                 }
-                if(Enemy.currentMove == CharacterStateManager.MoveState.Attack)
+                if((Enemy.currentMove == CharacterStateManager.MoveState.Attack) && (distance < 3.5f))
                 {
                     return 2;
                 }
                 if(Enemy.currentMove == CharacterStateManager.MoveState.Cooldown)
                 {
-                    Debug.Log("punch counter");
                     if((character.currentEnum == CharacterStateManager.States.CharacterCrouchAndBlockState)
                     || (character.currentEnum == CharacterStateManager.States.CharacterCrouchState))
                     {
@@ -118,8 +120,25 @@ public class FiniteStateMachine : MonoBehaviour
             {
                 return 3; 
             }
+            
+            else if((Enemy.currentEnum == CharacterStateManager.States.CharacterPunchState)
+                    && (Enemy.currentMove == CharacterStateManager.MoveState.Attack))
+            {
+                return 1; 
+            }
             // if in range punch
-            else return 4; 
+            else
+            {
+                if(Random.value < 0.6)
+                {
+                    return 4;
+                }
+                // randomly move back
+                else
+                {
+                    return 1; 
+                }
+            }  
         }
         else if(character.currentEnum == CharacterStateManager.States.CharacterCrouchState)
         {

@@ -93,6 +93,7 @@ public class CharacterMoveState : CharacterBaseState
         {
             // forward 
             case "d":
+                character.GetRigidbody().velocity = Vector3.zero;
                 character.transform.position += Vector3.right * AISpeed * Time.deltaTime;
                 AIMove = "d";
                 break;
@@ -104,6 +105,7 @@ public class CharacterMoveState : CharacterBaseState
                 break;
             // back
             case "a":
+                character.GetRigidbody().velocity = Vector3.zero;   
                 character.transform.position += Vector3.right * -AISpeed * Time.deltaTime;
                 AIMove = "a";
                 break;

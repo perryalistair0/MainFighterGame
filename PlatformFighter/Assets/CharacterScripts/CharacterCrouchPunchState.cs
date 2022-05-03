@@ -56,7 +56,7 @@ public class CharacterCrouchPunchState : CharacterBaseState
 
             if (Quaternion.Angle(character.transform.rotation, Quaternion.Euler(0, StartRotation.y + 45, 0)) < 1) { step++; }
         }
-        else if (step != 1)
+        else if (step == 1)
         {
             character.currentMove = CharacterStateManager.MoveState.Attack;
             character.Arm1.transform.localScale = new Vector3(0.5f, 1.2f, 0.5f);
@@ -86,7 +86,7 @@ public class CharacterCrouchPunchState : CharacterBaseState
     public override void TakeDamage(CharacterStateManager character, int Damage)
     {   
         // Interrupts attack 
-        if(step == 0)
+        if(step != 1)
         {
             character.Arm1.SetActive(true); 
             character.Arm2.SetActive(false);
