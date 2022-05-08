@@ -14,7 +14,7 @@ public class CharacterCrouchState : CharacterBaseState
 
         character.Leg1.SetActive(false);
         character.Leg2.SetActive(true);
-        character.transform.position = new Vector3(character.transform.position.x, 2.1f, character.transform.position.z);
+        character.transform.localPosition = new Vector3(character.transform.localPosition.x, 2.1f, character.transform.localPosition.z);
 
     }
 
@@ -65,7 +65,7 @@ public class CharacterCrouchState : CharacterBaseState
         {
             character.Leg1.SetActive(true);
             character.Leg2.SetActive(false);
-            character.transform.position = new Vector3(character.transform.position.x, 3f, character.transform.position.z);
+            character.transform.localPosition = new Vector3(character.transform.localPosition.x, 3f, character.transform.localPosition.z);
             character.SwitchState(character.CharacterMoveState);
         }
     }

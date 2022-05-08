@@ -50,13 +50,18 @@ public class FiniteStateMachine : MonoBehaviour
             }
             else
             {   
-                if(Random.value > 0.5)
+                float random = Random.value;
+                if(random > 0.6)
                 {
                     CurrentEnumState = states.Aggressive;
                 }            
-                else
+                else if(random > 0.4)
                 {
                     CurrentEnumState = states.PassiveAggressive;
+                }
+                else
+                {
+                    CurrentEnumState = states.Passive;
                 }
             }
             NextSwitch = Time.time + Random.Range(Interval1, Interval2);

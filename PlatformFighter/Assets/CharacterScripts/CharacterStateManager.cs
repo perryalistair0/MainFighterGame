@@ -80,7 +80,7 @@ public class CharacterStateManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        
         ShowEyebrows(false);    
         rb = GetComponent<Rigidbody>();
         currentEnum = States.CharacterMoveState;
@@ -92,7 +92,7 @@ public class CharacterStateManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {   
-        transform.position = new Vector3(transform.position.x, 4.5f, transform.position.z);
+        transform.position = new Vector3(transform.position.x, 4.5f, StartPosition.z);
         currentState.UpdateState(this);
     }
     private void OnCollisionStay(Collision collision)
