@@ -45,9 +45,10 @@ public class FighterAgent : Agent
     }
     public override void CollectObservations(VectorSensor sensor)
     {
-        
+        sensor.AddObservation(transform.localPosition);
+
         // Obeserve internal state
-        
+        /*
         for (int ci = 0; ci < (int)CharacterStateManager.States.CharacterLastState; ci++)
         {
             sensor.AddObservation((int)character.currentEnum == ci ? 1.0f : 0.0f);
@@ -79,6 +80,7 @@ public class FighterAgent : Agent
             sensor.AddObservation(gameManager.Player2Health);
             sensor.AddObservation(gameManager.Player1Health);
         }  
+        */
     }
     public override void OnActionReceived(ActionBuffers actionBuffers)
     {

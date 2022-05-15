@@ -1,51 +1,60 @@
 {
     "Imitation": {
+        "elo": 1192.7268791522758,
         "checkpoints": [
             {
-                "steps": 499993,
-                "file_path": "results\\imitation\\Imitation\\Imitation-499993.onnx",
+                "steps": 74320,
+                "file_path": "results\\Imitation\\Imitation\\Imitation-74320.onnx",
                 "reward": null,
-                "creation_time": 1652020445.6075513,
+                "creation_time": 1652430045.510308,
                 "auxillary_file_paths": [
-                    "results\\imitation\\Imitation\\Imitation-499993.pt"
+                    "results\\Imitation\\Imitation\\Imitation-74320.pt"
                 ]
             },
             {
-                "steps": 999974,
-                "file_path": "results\\imitation\\Imitation\\Imitation-999974.onnx",
-                "reward": 7.866245012633954,
-                "creation_time": 1652022954.54713,
-                "auxillary_file_paths": [
-                    "results\\imitation\\Imitation\\Imitation-999974.pt"
-                ]
-            },
-            {
-                "steps": 1499955,
-                "file_path": "results\\imitation\\Imitation\\Imitation-1499955.onnx",
-                "reward": -0.0012529999985417817,
-                "creation_time": 1652025632.6221342,
-                "auxillary_file_paths": [
-                    "results\\imitation\\Imitation\\Imitation-1499955.pt"
-                ]
-            },
-            {
-                "steps": 1599377,
-                "file_path": "results\\imitation\\Imitation\\Imitation-1599377.onnx",
+                "steps": 98941,
+                "file_path": "results\\Imitation\\Imitation\\Imitation-98941.onnx",
                 "reward": null,
-                "creation_time": 1652026161.7463398,
+                "creation_time": 1652430200.9756727,
                 "auxillary_file_paths": [
-                    "results\\imitation\\Imitation\\Imitation-1599377.pt"
+                    "results\\Imitation\\Imitation\\Imitation-98941.pt"
+                ]
+            },
+            {
+                "steps": 246582,
+                "file_path": "results\\Imitation\\Imitation\\Imitation-246582.onnx",
+                "reward": null,
+                "creation_time": 1652430965.6576872,
+                "auxillary_file_paths": [
+                    "results\\Imitation\\Imitation\\Imitation-246582.pt"
+                ]
+            },
+            {
+                "steps": 499953,
+                "file_path": "results\\Imitation\\Imitation\\Imitation-499953.onnx",
+                "reward": null,
+                "creation_time": 1652432187.2913487,
+                "auxillary_file_paths": [
+                    "results\\Imitation\\Imitation\\Imitation-499953.pt"
+                ]
+            },
+            {
+                "steps": 598830,
+                "file_path": "results\\Imitation\\Imitation\\Imitation-598830.onnx",
+                "reward": null,
+                "creation_time": 1652432621.5476608,
+                "auxillary_file_paths": [
+                    "results\\Imitation\\Imitation\\Imitation-598830.pt"
                 ]
             }
         ],
-        "elo": 1114.401645288709,
         "final_checkpoint": {
-            "steps": 1599377,
-            "file_path": "results\\imitation\\Imitation.onnx",
+            "steps": 598830,
+            "file_path": "results\\Imitation\\Imitation.onnx",
             "reward": null,
-            "creation_time": 1652026161.7463398,
+            "creation_time": 1652432621.5476608,
             "auxillary_file_paths": [
-                "results\\imitation\\Imitation\\Imitation-1599377.pt"
+                "results\\Imitation\\Imitation\\Imitation-598830.pt"
             ]
         }
     },

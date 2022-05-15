@@ -35,7 +35,7 @@ behaviors:
           deterministic: false
       gail:
         gamma: 0.99
-        strength: 0.0
+        strength: 0.01
         network_settings:
           normalize: false
           hidden_units: 128
@@ -48,7 +48,7 @@ behaviors:
         encoding_size: null
         use_actions: false
         use_vail: false
-        demo_path: Assets/Demonstrations/SelfFSM.demo
+        demo_path: Assets/Demonstrations/Raycast_0.demo
     init_path: null
     keep_checkpoints: 5
     checkpoint_interval: 500000
@@ -64,7 +64,7 @@ behaviors:
       play_against_latest_model_ratio: 0.5
       initial_elo: 1200.0
     behavioral_cloning:
-      demo_path: Assets/Demonstrations/SelfFSM.demo
+      demo_path: Assets/Demonstrations/Raycast_0.demo
       steps: 0
       strength: 0.0
       samples_per_update: 0
@@ -84,17 +84,17 @@ engine_settings:
   width: 84
   height: 84
   quality_level: 5
-  time_scale: 4.0
+  time_scale: 5.0
   target_frame_rate: -1
   capture_frame_rate: 60
   no_graphics: false
 environment_parameters: null
 checkpoint_settings:
-  run_id: imitation
+  run_id: Imitation
   initialize_from: null
   load_model: false
-  resume: false
-  force: true
+  resume: true
+  force: false
   train_model: false
   inference: false
   results_dir: results

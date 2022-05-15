@@ -29,7 +29,7 @@ public class GameManager : MonoBehaviour
     public string filepath = "Assets/Recourses/Player2History.txt";
     private void Start()
     {
-        Time.timeScale = 5f;
+        //Time.timeScale = 5f;
         EndEpisodeTime = Time.time + Timelimit;
         healthBarScale = healthBar1.transform.localScale;
         MaxHealthBarWidth = healthBarScale.x;
