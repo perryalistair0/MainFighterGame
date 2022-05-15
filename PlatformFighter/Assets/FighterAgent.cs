@@ -45,9 +45,10 @@ public class FighterAgent : Agent
     }
     public override void CollectObservations(VectorSensor sensor)
     {
-        
+        sensor.AddObservation(transform.localPosition);
+
         // Obeserve internal state
-        
+        /*
         for (int ci = 0; ci < (int)CharacterStateManager.States.CharacterLastState; ci++)
         {
             sensor.AddObservation((int)character.currentEnum == ci ? 1.0f : 0.0f);
@@ -66,8 +67,8 @@ public class FighterAgent : Agent
         sensor.AddObservation(enemyfighter.transform.rotation.eulerAngles.y);
 
         // Distance to other fighter
-        sensor.AddObservation(transform.position);
-        sensor.AddObservation(enemyfighter.transform.position);
+        sensor.AddObservation(transform.localPosition);
+        sensor.AddObservation(enemyfighter.transform.localPosition);
 
         if(IsPlayer1)
         {
@@ -78,7 +79,8 @@ public class FighterAgent : Agent
         {            
             sensor.AddObservation(gameManager.Player2Health);
             sensor.AddObservation(gameManager.Player1Health);
-        }       
+        }  
+        */
     }
     public override void OnActionReceived(ActionBuffers actionBuffers)
     {
@@ -100,13 +102,12 @@ public class FighterAgent : Agent
         }
         */
 
-        //float distance = Vector3.Distance(transform.position, enemyfighter.transform.position);
+        float distance = Vector3.Distance(transform.position, enemyfighter.transform.position);
 //        Debug.Log("Distance; " + distance + " reward, " + (0.1f / distance));
-      //  if(distance > 3f)
-       // {
-            // Debug.Log("Too far 0.0");
-            //AddReward(-0.000001f);
-        //}
+        if(distance > 4f)
+        {
+            AddReward(-0.000001f);
+        }
     }
     public override void Heuristic(in ActionBuffers actionsOut)
     {
@@ -216,19 +217,10 @@ public class FighterAgent : Agent
     public void PlayerWon()
     {
         AddReward(1);
-        if(IsPlayer1)
-        {
-            Debug.Log("Score: " + GetCumulativeReward());
-        }
     }
     public void PlayerLost()
     {
         AddReward(-1);
-        
-        if(IsPlayer1)
-        {
-            Debug.Log("Score: " + GetCumulativeReward());
-        }
     }
     public float GetReward()
     {

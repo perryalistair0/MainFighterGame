@@ -50,7 +50,8 @@ public class FiniteStateMachine : MonoBehaviour
             }
             else
             {   
-                if(Random.value > 0.5)
+                float random = Random.value;
+                if(random > 0.5)
                 {
                     CurrentEnumState = states.Aggressive;
                 }            
@@ -63,7 +64,7 @@ public class FiniteStateMachine : MonoBehaviour
         }        
     }
     public int FSMmove()
-    {   
+    {           
         switch (CurrentEnumState)
         {
             case states.Aggressive:
@@ -72,7 +73,7 @@ public class FiniteStateMachine : MonoBehaviour
                 return PassiveAggressiveUpdate();
         }
 
-        return AggressiveUpdate();
+        return AggressiveUpdate(); 
     }
     int Approach()
     {

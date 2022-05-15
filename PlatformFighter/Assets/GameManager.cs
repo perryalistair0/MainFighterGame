@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System.IO;
-
 public class GameManager : MonoBehaviour
 {
     public GameObject Player1;
@@ -25,20 +24,12 @@ public class GameManager : MonoBehaviour
     public FighterAgent agent2; 
     float EndEpisodeTime;
     public float Timelimit = 30f; 
-    
-        string path = "Assets/Recourses/PlayerHistory.txt";
+    public int GameCount = 250; 
+    private int CurrentGame = 0;
+    public string filepath = "Assets/Recourses/Player2History.txt";
     private void Start()
     {
-        for(int i=0; i<50; i++)
-        {
-            
-        //Write some text to the test.txt file
-        StreamWriter writer = new StreamWriter(path, true);
-        string one = Random.Range(0, 2).ToString();
-        string two = (Random.value*100).ToString();
-        writer.WriteLine(one + "," + two);
-        writer.Close();
-        }
+        //Time.timeScale = 5f;
         EndEpisodeTime = Time.time + Timelimit;
         healthBarScale = healthBar1.transform.localScale;
         MaxHealthBarWidth = healthBarScale.x;
@@ -89,7 +80,6 @@ public class GameManager : MonoBehaviour
             healthBar2.transform.localScale = new Vector3((Player2Health / MaxPlayerHealth) * MaxHealthBarWidth, 
                                                            healthBarScale.y,
                                                            healthBarScale.z);
-           
             agent1.DamageEnemy(Damage);
             agent2.DamagePlayer(Damage);
         }
@@ -102,11 +92,19 @@ public class GameManager : MonoBehaviour
             {
                 agent1.PlayerWon();
                 agent2.PlayerLost();
+                string line = "";
+                line = "1,";
+                line += Player1Health;
+                writeline(line);
             }
             if(Player1Health < 0)
             {
                 agent2.PlayerWon();
                 agent1.PlayerLost();
+                string line = "";
+                line = "2,";
+                line += Player2Health;
+                writeline(line);
             }
             Restart();
             EndEpisodeTime = Time.time + Timelimit;
@@ -124,5 +122,21 @@ public class GameManager : MonoBehaviour
             Player1.transform.position = Player2.transform.position;
             Player2.transform.position = Temp;
         }
+    }
+    void writeline(string line)
+    {
+        if(CurrentGame < GameCount)
+        {
+            StreamWriter writer = new StreamWriter(filepath, true);
+            writer.WriteLine("pog");
+            writer.Close();
+        }
+        else
+        {
+            Debug.Log("COMPLETED ALL GAMES YOU CAN NOW QUIT");
+            Application.Quit();
+        }
+        CurrentGame++;
+        Debug.Log(CurrentGame);
     }
 }

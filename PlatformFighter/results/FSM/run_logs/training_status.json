@@ -2,58 +2,58 @@
     "FSM": {
         "checkpoints": [
             {
-                "steps": 399954,
-                "file_path": "results\\FSM\\FSM\\FSM-399954.onnx",
+                "steps": 349945,
+                "file_path": "results\\FSM\\FSM\\FSM-349945.onnx",
                 "reward": null,
-                "creation_time": 1651347832.1388023,
+                "creation_time": 1651965686.735359,
                 "auxillary_file_paths": [
-                    "results\\FSM\\FSM\\FSM-399954.pt"
+                    "results\\FSM\\FSM\\FSM-349945.pt"
                 ]
             },
             {
-                "steps": 420306,
-                "file_path": "results\\FSM\\FSM\\FSM-420306.onnx",
+                "steps": 399963,
+                "file_path": "results\\FSM\\FSM\\FSM-399963.onnx",
                 "reward": null,
-                "creation_time": 1651348251.6216822,
+                "creation_time": 1651965826.5233977,
                 "auxillary_file_paths": [
-                    "results\\FSM\\FSM\\FSM-420306.pt"
+                    "results\\FSM\\FSM\\FSM-399963.pt"
                 ]
             },
             {
-                "steps": 449945,
-                "file_path": "results\\FSM\\FSM\\FSM-449945.onnx",
+                "steps": 449995,
+                "file_path": "results\\FSM\\FSM\\FSM-449995.onnx",
                 "reward": null,
-                "creation_time": 1651348517.6188703,
+                "creation_time": 1651965965.371493,
                 "auxillary_file_paths": [
-                    "results\\FSM\\FSM\\FSM-449945.pt"
+                    "results\\FSM\\FSM\\FSM-449995.pt"
                 ]
             },
             {
-                "steps": 499975,
-                "file_path": "results\\FSM\\FSM\\FSM-499975.onnx",
+                "steps": 499979,
+                "file_path": "results\\FSM\\FSM\\FSM-499979.onnx",
                 "reward": null,
-                "creation_time": 1651348883.463893,
+                "creation_time": 1651966103.411147,
                 "auxillary_file_paths": [
-                    "results\\FSM\\FSM\\FSM-499975.pt"
+                    "results\\FSM\\FSM\\FSM-499979.pt"
                 ]
             },
             {
-                "steps": 500039,
-                "file_path": "results\\FSM\\FSM\\FSM-500039.onnx",
+                "steps": 500043,
+                "file_path": "results\\FSM\\FSM\\FSM-500043.onnx",
                 "reward": null,
-                "creation_time": 1651348883.5805798,
+                "creation_time": 1651966103.5667317,
                 "auxillary_file_paths": [
-                    "results\\FSM\\FSM\\FSM-500039.pt"
+                    "results\\FSM\\FSM\\FSM-500043.pt"
                 ]
             }
         ],
         "final_checkpoint": {
-            "steps": 500039,
+            "steps": 500043,
             "file_path": "results\\FSM\\FSM.onnx",
             "reward": null,
-            "creation_time": 1651348883.5805798,
+            "creation_time": 1651966103.5667317,
             "auxillary_file_paths": [
-                "results\\FSM\\FSM\\FSM-500039.pt"
+                "results\\FSM\\FSM\\FSM-500043.pt"
             ]
         }
     },
