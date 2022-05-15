@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System.IO;
 
 public class GameManager : MonoBehaviour
 {
@@ -24,8 +25,20 @@ public class GameManager : MonoBehaviour
     public FighterAgent agent2; 
     float EndEpisodeTime;
     public float Timelimit = 30f; 
+    
+        string path = "Assets/Recourses/PlayerHistory.txt";
     private void Start()
     {
+        for(int i=0; i<50; i++)
+        {
+            
+        //Write some text to the test.txt file
+        StreamWriter writer = new StreamWriter(path, true);
+        string one = Random.Range(0, 2).ToString();
+        string two = (Random.value*100).ToString();
+        writer.WriteLine(one + "," + two);
+        writer.Close();
+        }
         EndEpisodeTime = Time.time + Timelimit;
         healthBarScale = healthBar1.transform.localScale;
         MaxHealthBarWidth = healthBarScale.x;
