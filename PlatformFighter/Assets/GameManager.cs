@@ -20,6 +20,8 @@ public class GameManager : MonoBehaviour
 
     public float Player1Health;
     public float Player2Health;
+    private bool isVectorAgent;
+    public FighterAgent1 agent11;
     public FighterAgent agent1;
     public FighterAgent agent2; 
     float EndEpisodeTime;
@@ -27,8 +29,19 @@ public class GameManager : MonoBehaviour
     public int GameCount = 250; 
     private int CurrentGame = 0;
     public string filepath = "Assets/Recourses/Player2History.txt";
+    public TextMesh score1Text;
+    public int score1Int = 0;
+
+    public TextMesh score2Text;
+    public int score2Int = 0;
+
     private void Start()
     {
+        Time.timeScale = 5;
+        if(agent1 == null)
+        {
+            isVectorAgent = true;
+        }
         //Time.timeScale = 5f;
         EndEpisodeTime = Time.time + Timelimit;
         healthBarScale = healthBar1.transform.localScale;
@@ -68,8 +81,16 @@ public class GameManager : MonoBehaviour
               //                                               HealthBar1.rectTransform.sizeDelta.y);
             healthBar1.transform.localScale = new Vector3((Player1Health / MaxPlayerHealth) * MaxHealthBarWidth, 
                                                            healthBarScale.y,
+            
                                                            healthBarScale.z);
-            agent1.DamagePlayer(Damage);
+            if(isVectorAgent)
+            {
+                agent11.DamagePlayer(Damage);
+            }
+            else
+            {
+                agent1.DamagePlayer(Damage);
+            }
             agent2.DamageEnemy(Damage);
         }
         else
@@ -80,7 +101,15 @@ public class GameManager : MonoBehaviour
             healthBar2.transform.localScale = new Vector3((Player2Health / MaxPlayerHealth) * MaxHealthBarWidth, 
                                                            healthBarScale.y,
                                                            healthBarScale.z);
-            agent1.DamageEnemy(Damage);
+            if(isVectorAgent)
+            {
+                agent11.DamagePlayer(Damage);
+            }
+            else
+            {
+                agent1.DamageEnemy(Damage);
+
+            }
             agent2.DamagePlayer(Damage);
         }
     }
@@ -90,7 +119,16 @@ public class GameManager : MonoBehaviour
         {
             if(Player2Health < 0)
             {
-                agent1.PlayerWon();
+                if(isVectorAgent)
+                {
+                    agent11.PlayerWon();
+                }
+                else
+                {
+                    agent1.PlayerWon();
+                }
+                score1Int++;
+                score1Text.text = score1Int.ToString();
                 agent2.PlayerLost();
                 string line = "";
                 line = "1,";
@@ -100,7 +138,16 @@ public class GameManager : MonoBehaviour
             if(Player1Health < 0)
             {
                 agent2.PlayerWon();
-                agent1.PlayerLost();
+                if(isVectorAgent)
+                {
+                    agent11.PlayerLost();
+                }
+                else
+                {
+                    agent1.PlayerLost();
+                }
+                score2Int++;
+                score2Text.text = score2Int.ToString();
                 string line = "";
                 line = "2,";
                 line += Player2Health;
@@ -112,7 +159,14 @@ public class GameManager : MonoBehaviour
         if(Time.time > EndEpisodeTime)
         {
             Debug.Log("Game end");
-            agent1.GameOver();
+            if(isVectorAgent)
+            {
+                agent11.GameOver();
+            }
+            else
+            {
+                agent1.GameOver();
+            }
             agent2.GameOver();
             EndEpisodeTime = Time.time + Timelimit;
         }
@@ -123,6 +177,7 @@ public class GameManager : MonoBehaviour
             Player2.transform.position = Temp;
         }
     }
+
     void writeline(string line)
     {
         if(CurrentGame < GameCount)
@@ -137,6 +192,5 @@ public class GameManager : MonoBehaviour
             Application.Quit();
         }
         CurrentGame++;
-        Debug.Log(CurrentGame);
     }
 }

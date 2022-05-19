@@ -64,7 +64,7 @@ public class FiniteStateMachine : MonoBehaviour
         }        
     }
     public int FSMmove()
-    {           
+    {         
         switch (CurrentEnumState)
         {
             case states.Aggressive:

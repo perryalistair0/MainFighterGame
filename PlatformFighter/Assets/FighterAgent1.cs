@@ -4,12 +4,9 @@ using UnityEngine;
 using Unity.MLAgents;
 using Unity.MLAgents.Sensors;
 using Unity.MLAgents.Actuators;
-using System.Text;
-using System.IO;
 
-public class FighterAgent : Agent
+public class FighterAgent1 : Agent
 {
-    public string fighterName = "empty";
     public bool isFSM = false;
     public FiniteStateMachine FSM_Model;
     string CurrentFSMInput = "";
@@ -19,15 +16,9 @@ public class FighterAgent : Agent
     Rigidbody rb;
     bool IsPlayer1; 
     Vector3 startPos;
-    string filepath;
-    int[] move_count = new int[] {0, 0, 0, 0, 0, 0};
     // Start is called before the first frame update
     void Start()
     {  
-        filepath =  "Assets/Recourses/yourtextfile1" + fighterName + ".txt";
-        System.IO.File.WriteAllText(filepath, "start");
-
-
         FSM_Model = GetComponent<FiniteStateMachine>();
         rb = GetComponent<Rigidbody>();
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
@@ -54,10 +45,9 @@ public class FighterAgent : Agent
     }
     public override void CollectObservations(VectorSensor sensor)
     {
-        sensor.AddObservation(transform.localPosition);
-
+        
         // Obeserve internal state
-        /*
+        
         for (int ci = 0; ci < (int)CharacterStateManager.States.CharacterLastState; ci++)
         {
             sensor.AddObservation((int)character.currentEnum == ci ? 1.0f : 0.0f);
@@ -89,7 +79,6 @@ public class FighterAgent : Agent
             sensor.AddObservation(gameManager.Player2Health);
             sensor.AddObservation(gameManager.Player1Health);
         }  
-        */
     }
     public override void OnActionReceived(ActionBuffers actionBuffers)
     {
@@ -99,7 +88,6 @@ public class FighterAgent : Agent
         if(input == 3) { character.currentState.AIinput(character, "d"); }
         if(input == 4) { character.currentState.AIinput(character, "j"); }
         if(input == 5) { character.currentState.AIinput(character, "k"); }
-        move_count[input]++;
         /*
         if(IsPlayer1 && GetComponent<Rigidbody>().velocity.x == 10)
         {
@@ -206,18 +194,6 @@ public class FighterAgent : Agent
         {
             Debug.Log("Final: " + GetCumulativeReward());
         }
-        FileStream fs=new FileStream(filepath, FileMode.Append, FileAccess.Write, FileShare.Write);
-        fs.Close();
-        StreamWriter sw=new StreamWriter(filepath, true, Encoding.ASCII);
-        sw.Write("new game");
-        sw.Write("\n");
-        Debug.Log(filepath + " move_count, " + string.Join(", ", move_count));
-        foreach(int i in move_count)
-        {
-            sw.Write(i.ToString());
-            sw.Write("\n");
-        }
-        sw.Close();
         EndEpisode();
     }
 
@@ -238,7 +214,6 @@ public class FighterAgent : Agent
     
     public void PlayerWon()
     {
-        
         AddReward(1);
     }
     public void PlayerLost()
